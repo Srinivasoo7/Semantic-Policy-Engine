@@ -12,8 +12,8 @@ deploy_no_freeze_allowed,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
 deploy_no_freeze_allowed,4,State-dependent,opa_set,0,0,0,0,0
 deploy_no_freeze_allowed,4,State-dependent,opa_derived,0,0,0,0,0
 deploy_prod,3,Relationship-dependent,rdf_owl_shacl,0,1,1,0,3
-deploy_prod,3,Relationship-dependent,opa_set,0,0,1,1,0
-deploy_prod,3,Relationship-dependent,opa_derived,0,0,1,1,0
+deploy_prod,3,Relationship-dependent,opa_set,0,0,1,1,3
+deploy_prod,3,Relationship-dependent,opa_derived,0,0,1,1,3
 deploy_prod_approved,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 deploy_prod_approved,2,Attribute-based,opa_set,0,0,0,0,0
 deploy_prod_approved,2,Attribute-based,opa_derived,0,0,0,0,0
@@ -21,8 +21,8 @@ deploy_staging_allowed,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 deploy_staging_allowed,2,Attribute-based,opa_set,0,0,0,0,0
 deploy_staging_allowed,2,Attribute-based,opa_derived,0,0,0,0,0
 query_logs_prod,6,Obligation,rdf_owl_shacl,0,1,1,0,3
-query_logs_prod,6,Obligation,opa_set,0,0,1,1,0
-query_logs_prod,6,Obligation,opa_derived,0,0,1,1,0
+query_logs_prod,6,Obligation,opa_set,0,0,1,1,3
+query_logs_prod,6,Obligation,opa_derived,0,0,1,1,3
 query_logs_sensitive_obligation,6,Obligation,rdf_owl_shacl,0,0,0,0,0
 query_logs_sensitive_obligation,6,Obligation,opa_set,0,0,0,0,0
 query_logs_sensitive_obligation,6,Obligation,opa_derived,0,0,0,0,0
@@ -51,8 +51,8 @@ restart_break_glass_expired,5,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
 restart_break_glass_expired,5,Exception/break-glass,opa_set,0,0,0,0,0
 restart_break_glass_expired,5,Exception/break-glass,opa_derived,0,0,0,0,0
 restart_customer_facing,3,Relationship-dependent,rdf_owl_shacl,0,1,1,0,1
-restart_customer_facing,3,Relationship-dependent,opa_set,0,0,1,1,0
-restart_customer_facing,3,Relationship-dependent,opa_derived,0,0,1,1,0
+restart_customer_facing,3,Relationship-dependent,opa_set,0,0,1,1,1
+restart_customer_facing,3,Relationship-dependent,opa_derived,0,0,1,1,1
 restart_denied,3,Relationship-dependent,rdf_owl_shacl,0,0,0,0,0
 restart_denied,3,Relationship-dependent,opa_set,0,0,0,0,0
 restart_denied,3,Relationship-dependent,opa_derived,0,0,0,0,0
@@ -63,8 +63,8 @@ restart_in_maintenance_allowed,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
 restart_in_maintenance_allowed,4,State-dependent,opa_set,0,0,0,0,0
 restart_in_maintenance_allowed,4,State-dependent,opa_derived,0,0,0,0,0
 restart_new_prod_server,3,Relationship-dependent,rdf_owl_shacl,0,0,1,0,1
-restart_new_prod_server,3,Relationship-dependent,opa_set,0,0,1,1,0
-restart_new_prod_server,3,Relationship-dependent,opa_derived,0,0,1,0,0
+restart_new_prod_server,3,Relationship-dependent,opa_set,0,0,1,1,1
+restart_new_prod_server,3,Relationship-dependent,opa_derived,0,0,1,0,1
 restart_staging_allowed,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 restart_staging_allowed,2,Attribute-based,opa_set,0,0,0,0,0
 restart_staging_allowed,2,Attribute-based,opa_derived,0,0,0,0,0

@@ -7,9 +7,9 @@
 
 ## Main Claim
 
-> RDF/OWL/SHACL does not necessarily improve decision accuracy over strong rule-based baselines (OPA-set, OPA-derived), but it can **reduce enforcement-policy maintenance** when semantic class definitions evolve and are reused across multiple policies.
+> RDF/OWL/SHACL does not necessarily improve decision accuracy over strong rule-based baselines (OPA-set, OPA-derived). In terms of latency, RDF/OWL/SHACL is roughly two orders of magnitude slower than the lightweight OPA-set baseline, but only single-digit multiples slower than the stronger OPA-derived baseline in the current cold-evaluation prototype. In terms of explanation, RDF/OWL/SHACL produces substantially richer explanations than OPA-set, but OPA-derived can approach or match RDF/OWL/SHACL explanation completeness when explicitly engineered to export derived predicate traces. The strongest remaining distinction is maintainability location: RDF/OWL/SHACL localizes semantic class definitions in OWL, OPA-derived localizes them in Rego predicates over JSON, and OPA-set localizes them in explicit classification sets.
 
-This is a **maintainability and explanation** claim, not a raw accuracy superiority claim.
+This is a **maintainability and explanation completeness** claim, not a raw accuracy superiority claim.
 
 ---
 
@@ -17,9 +17,9 @@ This is a **maintainability and explanation** claim, not a raw accuracy superior
 
 | ID  | Hypothesis                                                                                                 | Evidence strategy                                                             |
 |-----|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| H3  | RDF/OWL/SHACL can produce richer, more reconstructable explanations than simple policy-as-code baselines (though modular OPA architectures with structured schemas can achieve comparable depth) | Explanation-quality metric across all 3 systems                               |
+| H3  | RDF/OWL/SHACL produces substantially richer explanations than OPA-set; OPA-derived can approach or match RDF/OWL/SHACL explanation completeness when explicitly engineered to export derived predicate traces | Explanation-completeness (field-completeness) metric across all 3 systems      |
 | H4  | RDF/OWL/SHACL requires fewer enforcement-policy edits when semantic class definitions change               | Maintainability metrics M1–M5 across E1–E3                                    |
-| RQ6 | The latency overhead of OWL inference + SHACL validation (measured in our cold-evaluation prototype) is acceptable for non-realtime agent-action gating, rather than highly performant realtime paths | Latency benchmark across 100/500/1000 iterations on all 8 core scenarios      |
+| RQ6 | The latency overhead of OWL inference + SHACL validation is roughly two orders of magnitude slower than the lightweight OPA-set baseline, but only single-digit multiples slower than the stronger OPA-derived baseline in the current cold-evaluation prototype, supporting feasibility for high-impact, non-realtime action gates rather than high-frequency realtime tool-call filtering | Latency benchmark across 100/500/1000 iterations on all 8 core scenarios      |
 
 ---
 
@@ -51,7 +51,7 @@ This is a **maintainability and explanation** claim, not a raw accuracy superior
 | M2     | Semantic-definition edits       | Number of OWL equivalentClass / unionOf definition edits required            |
 | M3     | Data edits                      | Number of enterprise fact additions or changes required                      |
 | M4     | Classification-code edits       | Number of Rego predicate edits (e.g. `is_production_server()`) required      |
-| M5     | Dependent policies auto-updated | Number of enforcement policies that automatically benefited from one M2 edit |
+| M5     | Dependent policies affected     | Number of dependent enforcement policies affected by one centralized abstraction edit |
 
 ---
 

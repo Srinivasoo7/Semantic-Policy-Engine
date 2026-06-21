@@ -1,14 +1,14 @@
 """
 explanation_quality.py
 =======================
-Score the explanation quality produced by each system against five criteria:
+Evaluate the explanation completeness (field-completeness scoring) produced by each system against five mechanical criteria:
 
   1. asserted_facts    — does the explanation list raw input facts used?
   2. inferred_facts    — does it list OWL-inferred / Rego-derived facts?
   3. violated_policy   — does it name the SHACL shape or Rego rule that fired?
   4. decision_reason   — does it provide a free-text justification?
   5. reconstructable   — can a human reconstruct the decision from the explanation alone?
-     (manual score 0/1, pre-populated in benchmark/expected/*.json)
+     (mechanical completeness score 0/1, pre-populated in benchmark/expected/*.json)
 
 Score per criterion: 1 if present/non-empty, 0 otherwise.
 Total score: sum of 5 criteria (max 5).
