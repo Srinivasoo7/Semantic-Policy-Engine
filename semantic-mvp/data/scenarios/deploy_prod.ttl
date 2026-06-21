@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+
+:action_deploy_prod a :DeployAction ;
+    :requestedBy :user_123 ;
+    :performedBy :agent_01 ;
+    :targets :srv_777 ;
+    :hasReason "deploying to a pci-dss server" .

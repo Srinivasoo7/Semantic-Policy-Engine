@@ -1,0 +1,1 @@
+{"scenario_id":"restart_dev_allowed","tier":1,"tier_name":"Flat access","action_type":"RestartServerAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_dev","reason":"restart dev server","change_tickets":[],"exceptions":[],"instructions":[]}

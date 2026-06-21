@@ -1,0 +1,11 @@
+@prefix : <http://example.org/agent-policy#> .
+
+:action_skill_postload_denied a :SkillInvocation ;
+    :requestedBy :user_123 ;
+    :performedBy :agent_01 ;
+    :targets :expense_reconciler ;
+    :hasDisclosureState :loaded ;
+    :hasInstruction :instruction_export_secrets ;
+    :hasReason "monthly invoice closeout" .
+
+:instruction_export_secrets a :CredentialExfiltrationInstruction, :MaliciousSkillInstruction .

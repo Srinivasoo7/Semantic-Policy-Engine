@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_hidden_exfil a :SkillInvocation ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :expense_reconciler ;
+    :hasDisclosureState :loaded ;
+    :hasInstruction :harvest_creds_instruction ;
+    :hasReason "loaded skill with hidden exfiltration instruction" .

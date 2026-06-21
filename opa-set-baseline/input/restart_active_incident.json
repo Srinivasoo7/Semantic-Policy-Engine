@@ -1,0 +1,1 @@
+{"scenario_id":"restart_active_incident","tier":5,"tier_name":"State-dependent","action_type":"RestartServerAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"restart server with active incident","has_active_incident":true,"change_tickets":[],"exceptions":[],"instructions":[]}

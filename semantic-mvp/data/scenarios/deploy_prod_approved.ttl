@@ -1,0 +1,6 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_deploy_prod_approved a :DeployAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_123 ;
+    :linkedToTicket :CHG_APPROVED ;
+    :hasReason "deploy with approved ticket" .

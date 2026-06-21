@@ -1,0 +1,1 @@
+{"scenario_id":"query_logs_staging_no_audit","tier":7,"tier_name":"Obligation","action_type":"QueryLogsAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_456","reason":"query staging logs no audit","has_audit_obligation":false,"change_tickets":[],"exceptions":[],"instructions":[]}

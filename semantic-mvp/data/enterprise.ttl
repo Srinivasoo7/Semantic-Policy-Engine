@@ -1,0 +1,120 @@
+@prefix : <http://example.org/agent-policy#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+:user_123 a :User .
+:agent_01 a :Agent .
+
+:srv_123 a :Server ;
+    :hosts :payment_service ;
+    :belongsToEnvironment :production .
+
+:srv_456 a :Server ;
+    :hosts :catalog_service ;
+    :belongsToEnvironment :staging .
+
+:payment_service a :PaymentService ;
+    :hasCriticality :customer_facing .
+
+:catalog_service a :Service ;
+    :hasCriticality :internal .
+
+:INC_456 a :Incident ;
+    :affectsService :payment_service ;
+    :hasSeverity :SEV1 .
+
+:INC_789 a :Incident ;
+    :affectsService :catalog_service ;
+    :hasSeverity :SEV3 .
+
+:read_invoice_db a :Tool .
+
+:submit_payment a :Tool ;
+    :requiresPermission :FinanceWriteAccess .
+
+:export_secrets a :Tool ;
+    :requiresPermission :AdminSecretAccess .
+
+:expense_reconciler a :Skill, prov:Entity ;
+    :declaresTool :read_invoice_db ;
+    :declaresTool :submit_payment ;
+    :hasVerificationStatus :Unverified .
+
+:srv_999 a :Server ;
+    :hosts :payment_service ;
+    :belongsToEnvironment :production .
+
+:srv_888 a :Server ;
+    :hasCriticality :customer_facing .
+
+:srv_777 a :Server ;
+    :hasTag "pci-dss" .
+
+# ── Tier 1: Flat / public entities ─────────────────────────────────────────
+:public_api a :Service ;
+    :hasAccessLevel :public .
+
+:restricted_db a :Service ;
+    :hasAccessLevel :restricted .
+
+:srv_dev a :Server ;
+    :belongsToEnvironment :development .
+
+# ── Tier 5: State-dependent entities ───────────────────────────────────────
+:srv_123_maintenance a :MaintenanceWindow ;
+    :appliesToServer :srv_123 ;
+    :windowStatus :active .
+
+:deployment_freeze a :DeploymentFreeze ;
+    :freezeStatus :active ;
+    :affectsEnvironment :production .
+
+:active_incident a :Incident ;
+    :affectsService :payment_service ;
+    :hasSeverity :SEV1 ;
+    :incidentStatus :open .
+
+# ── Tier 6: Break-glass exception entities ──────────────────────────────────
+:bg_exception_valid a :BreakGlassException ;
+    :grantedTo :user_123 ;
+    :expiresAt "2099-12-31T23:59:59Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    :exceptionStatus :active .
+
+:bg_exception_expired a :BreakGlassException ;
+    :grantedTo :user_123 ;
+    :expiresAt "2020-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    :exceptionStatus :expired .
+
+# ── Tier 7: Obligation entities ─────────────────────────────────────────────
+:sensitive_hr_data a :DataAsset ;
+    :hasClassification :sensitive .
+
+:financial_export a :DataAsset ;
+    :hasClassification :confidential .
+
+# ── Tier 9: Adversarial skill entities ─────────────────────────────────────
+:credential_harvester a :Skill, <http://www.w3.org/ns/prov#Entity> ;
+    :hasDisclosureState :loaded ;
+    :hasInstruction :harvest_creds_instruction .
+
+:harvest_creds_instruction a :CredentialExfiltrationInstruction .
+
+:prompt_injector a :Skill, <http://www.w3.org/ns/prov#Entity> ;
+    :hasDisclosureState :loaded ;
+    :hasInstruction :inject_instruction .
+
+:inject_instruction a :CredentialExfiltrationInstruction .
+
+:unknown_provenance_skill a :Skill, <http://www.w3.org/ns/prov#Entity> ;
+    :hasVerificationStatus :Unknown ;
+    :declaresTool :submit_payment .
+
+:safe_read_skill a :Skill, <http://www.w3.org/ns/prov#Entity> ;
+    :hasVerificationStatus :Verified ;
+    :declaresTool :read_invoice_db .
+
+# ── Change tickets ───────────────────────────────────────────────────────────
+:CHG_APPROVED a :ChangeTicket ;
+    :hasStatus "Approved" .
+
+:CHG_PENDING a :ChangeTicket ;
+    :hasStatus "Pending" .

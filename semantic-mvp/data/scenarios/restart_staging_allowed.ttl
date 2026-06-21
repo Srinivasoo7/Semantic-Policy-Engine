@@ -1,0 +1,8 @@
+@prefix : <http://example.org/agent-policy#> .
+
+:action_restart_staging_allowed a :RestartServerAction ;
+    :requestedBy :user_123 ;
+    :performedBy :agent_01 ;
+    :targets :srv_456 ;
+    :linkedToTicket :INC_789 ;
+    :hasReason "staging service restart for testing" .

@@ -1,0 +1,4 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_restart_dev a :RestartServerAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_dev ; :hasReason "restart dev server" .

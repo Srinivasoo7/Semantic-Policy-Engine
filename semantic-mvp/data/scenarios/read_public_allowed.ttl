@@ -1,0 +1,4 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_read_public a :ReadAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :public_api ; :hasReason "read public API" .

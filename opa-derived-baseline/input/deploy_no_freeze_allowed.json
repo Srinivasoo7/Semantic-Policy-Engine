@@ -1,0 +1,1 @@
+{"scenario_id":"deploy_no_freeze_allowed","tier":5,"tier_name":"State-dependent","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_456","reason":"deploy to staging no freeze","is_deployment_freeze":false,"change_tickets":[],"exceptions":[],"instructions":[]}

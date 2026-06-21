@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Semantic Policy Agent Governance"
+abstract: >
+  A comparative study of RDF/OWL/SHACL, OPA-set, and OPA-derived baselines
+  for governing AI agent actions. Evaluates decision accuracy, explanation quality,
+  latency, and maintainability across a curated benchmark of 36+ scenarios.
+keywords:
+  - AI agent governance
+  - policy validation
+  - RDF
+  - OWL
+  - SHACL
+  - OPA
+  - Rego
+  - semantic web
+  - maintainability
+license: MIT
+repository-code: "https://github.com/placeholder/semantic-policy-agent-governance"
+version: "0.1.0"
+date-released: "2026-06-21"

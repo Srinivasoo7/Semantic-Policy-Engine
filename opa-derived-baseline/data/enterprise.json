@@ -1,0 +1,25 @@
+{
+  "servers": {
+    "srv_123": {
+      "environment": "production"
+    },
+    "srv_456": {
+      "environment": "staging"
+    },
+    "srv_999": {
+      "environment": "production"
+    },
+    "srv_888": {
+      "criticality": "customer_facing"
+    },
+    "srv_777": {
+      "tags": ["pci-dss"]
+    }
+  },
+  "skills": {
+    "expense_reconciler": {
+      "verification_status": "unverified",
+      "permissions": ["finance_write"]
+    }
+  }
+}

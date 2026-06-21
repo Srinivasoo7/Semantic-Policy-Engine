@@ -1,0 +1,11 @@
+{
+  "action_type": "RestartServerAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_888",
+  "linked_to_ticket": "INC_456",
+  "reason": "restarting a customer facing server that should be inferred as production",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": []
+}

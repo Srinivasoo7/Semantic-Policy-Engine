@@ -1,0 +1,117 @@
+@prefix : <http://example.org/agent-policy#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+:RestartProductionServerShape
+    a sh:NodeShape ;
+    sh:targetClass :RestartServerAction ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Restarting a production server requires an approved change ticket or an active break-glass exception." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+
+            SELECT $this WHERE {
+                $this :targets ?server .
+                ?server a :ProductionServer .
+
+                FILTER NOT EXISTS {
+                    $this :hasChangeTicket ?ticket .
+                    ?ticket :hasStatus :Approved .
+                }
+
+                FILTER NOT EXISTS {
+                    $this :hasException ?exception .
+                    ?exception a :ActiveBreakGlassException .
+                }
+            }
+        """ ;
+    ] .
+
+:UnverifiedFinanceSkillPreloadShape
+    a sh:NodeShape ;
+    sh:targetClass :SkillInvocation ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Pre-load invocation of an unverified skill that declares finance-write tools requires approval or clarification." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+
+            SELECT $this WHERE {
+                $this :targets ?skill .
+                $this :hasDisclosureState :advertised .
+                ?skill a :UnverifiedSkill .
+                ?skill :declaresTool ?tool .
+                ?tool :requiresPermission :FinanceWriteAccess .
+            }
+        """ ;
+    ] .
+
+:LoadedSkillCredentialExfiltrationShape
+    a sh:NodeShape ;
+    sh:targetClass :SkillInvocation ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "Loaded skill contains credential exfiltration or malicious instruction. Invocation must be denied." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+
+            SELECT $this WHERE {
+                $this :hasDisclosureState :loaded .
+                $this :hasInstruction ?instruction .
+                ?instruction a :CredentialExfiltrationInstruction .
+            }
+        """ ;
+    ] .
+
+# -------------------------------------------------------------------------
+# SHAPE 4: Deploying to Production
+# -------------------------------------------------------------------------
+:DeployProductionServerShape a sh:NodeShape ;
+    sh:targetClass :DeployAction ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Deploying to a production server requires an approved change ticket." ;
+        sh:severity sh:Warning ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "ex" ; sh:namespace "http://example.org/agent-policy#" ]
+        ] ;
+        sh:select """
+            SELECT $this ?server
+            WHERE {
+                $this ex:targets ?server .
+                ?server a ex:ProductionServer .
+                
+                # Fails if there is NO approved change ticket
+                FILTER NOT EXISTS {
+                    $this ex:linkedToTicket ?ticket .
+                    ?ticket ex:hasStatus "Approved" .
+                }
+            }
+        """
+    ] .
+
+# -------------------------------------------------------------------------
+# SHAPE 5: Querying Logs from Production
+# -------------------------------------------------------------------------
+:QueryLogsProductionServerShape a sh:NodeShape ;
+    sh:targetClass :QueryLogsAction ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Querying logs from a production server requires an audit obligation." ;
+        sh:severity sh:Info ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "ex" ; sh:namespace "http://example.org/agent-policy#" ]
+        ] ;
+        sh:select """
+            SELECT $this ?server
+            WHERE {
+                $this ex:targets ?server .
+                ?server a ex:ProductionServer .
+                
+                # Fails if there is NO audit obligation met
+                FILTER NOT EXISTS {
+                    $this ex:hasAuditObligation "true" .
+                }
+            }
+        """
+    ] .

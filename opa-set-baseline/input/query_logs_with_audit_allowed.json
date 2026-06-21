@@ -1,0 +1,1 @@
+{"scenario_id":"query_logs_with_audit_allowed","tier":7,"tier_name":"Obligation","action_type":"QueryLogsAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_777","reason":"query logs with audit","has_audit_obligation":true,"change_tickets":[],"exceptions":[],"instructions":[]}

@@ -1,0 +1,5 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_access_sensitive a :QueryLogsAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_888 ;
+    :hasReason "access sensitive customer-facing server logs without audit" .

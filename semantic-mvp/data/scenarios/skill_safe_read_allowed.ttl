@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_safe_skill a :SkillInvocation ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :safe_read_skill ;
+    :hasDisclosureState :loaded ;
+    :declaresTool :read_invoice_db ;
+    :hasReason "invoke verified read-only skill" .

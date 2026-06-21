@@ -1,0 +1,6 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_restart_bg_valid a :RestartServerAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_123 ;
+    :hasException :bg_exception_valid ;
+    :hasReason "restart with valid break-glass exception" .

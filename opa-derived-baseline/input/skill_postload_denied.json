@@ -1,0 +1,16 @@
+{
+  "action_type": "SkillInvocation",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "expense_reconciler",
+  "disclosure_state": "loaded",
+  "reason": "monthly invoice closeout",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": [
+    {
+      "id": "instruction_export_secrets",
+      "type": "CredentialExfiltrationInstruction"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_unknown_provenance_skill a :SkillInvocation ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :unknown_provenance_skill ;
+    :hasDisclosureState :advertised ;
+    :declaresTool :submit_payment ;
+    :hasReason "invoke skill with unknown provenance" .

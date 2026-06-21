@@ -1,0 +1,6 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_restart_active_incident a :RestartServerAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_123 ;
+    :hasActiveIncident :active_incident ;
+    :hasReason "restart server with active SEV1 incident" .

@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+
+:action_restart_customer_facing a :RestartServerAction ;
+    :requestedBy :user_123 ;
+    :performedBy :agent_01 ;
+    :targets :srv_888 ;
+    :hasReason "restarting a customer facing server that should be inferred as production" .

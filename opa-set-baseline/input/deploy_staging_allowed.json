@@ -1,0 +1,1 @@
+{"scenario_id":"deploy_staging_allowed","tier":2,"tier_name":"Attribute-based","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_456","reason":"deploy to staging","change_tickets":[],"exceptions":[],"instructions":[]}

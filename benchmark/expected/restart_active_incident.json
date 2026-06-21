@@ -1,0 +1,35 @@
+{
+  "scenario_id": "restart_active_incident",
+  "tier": 5,
+  "tier_name": "State-dependent",
+  "action_type": "RestartServerAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_123",
+  "expected_decision": "REQUIRE_APPROVAL",
+  "description": "Benchmark scenario for restart_active_incident",
+  "maintainability_rdf_owl_shacl": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_set": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_derived": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "reconstructable_rdf_owl_shacl": 1,
+  "reconstructable_opa_set": 0,
+  "reconstructable_opa_derived": 1
+}

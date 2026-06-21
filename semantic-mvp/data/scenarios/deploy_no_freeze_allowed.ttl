@@ -1,0 +1,5 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_deploy_no_freeze a :DeployAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_456 ;
+    :hasReason "deploy to staging no freeze" .

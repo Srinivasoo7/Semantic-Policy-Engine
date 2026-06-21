@@ -1,0 +1,7 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_prompt_injector a :SkillInvocation ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :prompt_injector ;
+    :hasDisclosureState :loaded ;
+    :hasInstruction :inject_instruction ;
+    :hasReason "invoke prompt injection skill" .

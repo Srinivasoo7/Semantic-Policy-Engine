@@ -1,0 +1,8 @@
+@prefix : <http://example.org/agent-policy#> .
+
+:action_restart_new_prod_server a :RestartServerAction ;
+    :requestedBy :user_123 ;
+    :performedBy :agent_01 ;
+    :targets :srv_999 ;
+    :linkedToTicket :INC_456 ;
+    :hasReason "new production server restart test" .

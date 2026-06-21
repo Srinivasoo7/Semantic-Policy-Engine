@@ -1,0 +1,49 @@
+name: CI — All Baselines
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  test-semantic-mvp:
+    name: Semantic MVP (RDF/OWL/SHACL)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r semantic-mvp/requirements.txt
+      - name: Run tests
+        run: pytest semantic-mvp/tests/ -q
+        working-directory: semantic-mvp
+
+  test-opa-set:
+    name: OPA-set Baseline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r opa-set-baseline/requirements.txt
+      - name: Run tests
+        run: pytest opa-set-baseline/tests/ -q
+        working-directory: opa-set-baseline
+
+  test-opa-derived:
+    name: OPA-derived Baseline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r opa-derived-baseline/requirements.txt
+      - name: Run tests
+        run: pytest opa-derived-baseline/tests/ -q
+        working-directory: opa-derived-baseline

@@ -1,0 +1,5 @@
+@prefix : <http://example.org/agent-policy#> .
+:action_deploy_no_exception a :DeployAction ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
+    :targets :srv_123 ;
+    :hasReason "deploy with no exception and no ticket" .

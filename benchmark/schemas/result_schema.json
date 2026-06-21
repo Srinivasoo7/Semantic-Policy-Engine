@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BenchmarkResult",
+  "description": "Standardized result record for one system evaluated on one scenario.",
+  "type": "object",
+  "required": [
+    "scenario_id", "tier", "tier_name", "system",
+    "expected_decision", "actual_decision", "correct",
+    "latency_ms",
+    "m1_enforcement_policy_edits", "m2_semantic_edits",
+    "m3_data_edits", "m4_classification_code_edits",
+    "m5_dependent_policies_affected",
+    "explanation"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "description": "Unique scenario identifier, e.g. 'restart_new_prod_server'"
+    },
+    "tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9,
+      "description": "Policy tier (1=flat, 2=attribute, ..., 9=adversarial)"
+    },
+    "tier_name": {
+      "type": "string",
+      "description": "Human-readable tier label"
+    },
+    "system": {
+      "type": "string",
+      "enum": ["rdf_owl_shacl", "opa_set", "opa_derived"],
+      "description": "Which baseline produced this result"
+    },
+    "expected_decision": {
+      "type": "string",
+      "enum": ["ALLOW", "DENY", "REQUIRE_APPROVAL", "ALLOW_WITH_OBLIGATION", "REQUIRE_CLARIFICATION"],
+      "description": "Ground-truth expected decision for this scenario"
+    },
+    "actual_decision": {
+      "type": "string",
+      "enum": ["ALLOW", "DENY", "REQUIRE_APPROVAL", "ALLOW_WITH_OBLIGATION", "REQUIRE_CLARIFICATION"],
+      "description": "Decision produced by the system"
+    },
+    "correct": {
+      "type": "boolean",
+      "description": "true if actual_decision == expected_decision"
+    },
+    "latency_ms": {
+      "type": "number",
+      "description": "Wall-clock evaluation time in milliseconds (median over N iterations)"
+    },
+    "latency_p95_ms": {
+      "type": "number",
+      "description": "p95 evaluation time in milliseconds"
+    },
+    "m1_enforcement_policy_edits": {
+      "type": "integer",
+      "description": "M1: Number of SHACL shape or Rego allow/deny rule edits required to support this scenario"
+    },
+    "m2_semantic_edits": {
+      "type": "integer",
+      "description": "M2: Number of OWL class definition edits required"
+    },
+    "m3_data_edits": {
+      "type": "integer",
+      "description": "M3: Number of enterprise data fact additions/changes required"
+    },
+    "m4_classification_code_edits": {
+      "type": "integer",
+      "description": "M4: Number of Rego predicate (e.g. is_production_server) edits required"
+    },
+    "m5_dependent_policies_affected": {
+      "type": "integer",
+      "description": "M5: Number of enforcement policies that automatically benefited from a shared abstraction change"
+    },
+    "explanation": {
+      "type": "object",
+      "description": "Structured explanation of how the decision was reached",
+      "required": ["asserted_facts", "inferred_facts", "violated_policy", "decision_reason"],
+      "properties": {
+        "asserted_facts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Raw facts from the scenario that were used"
+        },
+        "inferred_facts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Facts derived by OWL inference or Rego predicate evaluation"
+        },
+        "violated_policy": {
+          "type": "string",
+          "description": "Name of the SHACL shape or Rego rule that triggered the decision"
+        },
+        "decision_reason": {
+          "type": "string",
+          "description": "Free-text explanation of the decision"
+        }
+      }
+    }
+  }
+}

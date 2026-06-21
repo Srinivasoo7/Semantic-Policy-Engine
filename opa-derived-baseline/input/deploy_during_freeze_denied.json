@@ -1,0 +1,1 @@
+{"scenario_id":"deploy_during_freeze_denied","tier":5,"tier_name":"State-dependent","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"deploy during code freeze","is_deployment_freeze":true,"change_tickets":[],"exceptions":[],"instructions":[]}

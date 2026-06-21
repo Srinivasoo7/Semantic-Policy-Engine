@@ -1,0 +1,1 @@
+{"scenario_id":"deploy_break_glass_allowed","tier":6,"tier_name":"Exception/break-glass","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"emergency deploy with break-glass","change_tickets":[],"exceptions":[{"id":"bg_exception_valid","status":"active","type":"BreakGlassException"}],"instructions":[]}
