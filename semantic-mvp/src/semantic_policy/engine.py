@@ -64,38 +64,48 @@ def _collect_violated_policy(results_graph: Graph) -> str:
     return ""
 
 
-def _collect_inferred_types(graph: Graph) -> List[str]:
-    checks: List[Tuple[URIRef, URIRef]] = [
-        (AP.srv_123, AP.ProductionServer),
-        (AP.srv_123, AP.CriticalInfrastructureAsset),
-        (AP.srv_456, AP.StagingServer),
-        (AP.expense_reconciler, AP.UnverifiedSkill),
-    ]
-
+def _collect_inferred_types(
+    data_graph: Graph, scenario_only_graph: Graph, enterprise_graph: Graph
+) -> List[str]:
+    """Collect all inferred type assertions that were not in the original graphs."""
     inferred = []
-    for subject, klass in checks:
-        if (subject, RDF.type, klass) in graph:
-            inferred.append(f"{subject.split('#')[-1]} a {klass.split('#')[-1]}")
-    return inferred
+    for s, p, o in data_graph.triples((None, RDF.type, None)):
+        if str(o).startswith(str(AP)):
+            if (s, RDF.type, o) not in scenario_only_graph and (s, RDF.type, o) not in enterprise_graph:
+                s_name = str(s).split("#")[-1]
+                o_name = str(o).split("#")[-1]
+                inferred.append(f"{s_name} a {o_name}")
+    return sorted(list(set(inferred)))
 
 
-def decision_from_messages(conforms: bool, messages: List[str]) -> str:
-    if conforms:
+def _collect_violated_shapes(results_graph: Graph) -> List[str]:
+    """Return a list of local names of the source shapes that failed validation."""
+    shapes: List[str] = []
+    for result in results_graph.subjects(RDF.type, SH.ValidationResult):
+        for shape in results_graph.objects(result, SH.sourceShape):
+            shapes.append(str(shape).split("#")[-1])
+    return sorted(list(set(shapes)))
+
+
+def decision_from_shapes(conforms: bool, violated_shapes: List[str]) -> str:
+    if conforms or not violated_shapes:
         return "ALLOW"
 
-    joined = " ".join(messages).lower()
-
-    if "must be denied" in joined or "credential exfiltration" in joined:
+    # Priority 1: DENY shapes
+    if "LoadedSkillCredentialExfiltrationShape" in violated_shapes:
         return "DENY"
 
-    if (
-        "requires approval" in joined
-        or "requires approval or clarification" in joined
-        or "requires an approved" in joined
-    ):
+    # Priority 2: REQUIRE_APPROVAL shapes
+    approval_shapes = {
+        "RestartProductionServerShape",
+        "UnverifiedFinanceSkillPreloadShape",
+        "DeployProductionServerShape",
+    }
+    if any(s in approval_shapes for s in violated_shapes):
         return "REQUIRE_APPROVAL"
 
-    if "audit obligation" in joined:
+    # Priority 3: ALLOW_WITH_OBLIGATION shapes
+    if "QueryLogsProductionServerShape" in violated_shapes:
         return "ALLOW_WITH_OBLIGATION"
 
     return "REQUIRE_CLARIFICATION"
@@ -109,52 +119,47 @@ def run_policy_check(
     if root is None:
         root = Path(__file__).resolve().parents[2]
 
-    data_graph = load_graph(
-        [
-            root / "data" / "ontology.ttl",
-            root / "data" / "enterprise.ttl",
-            scenario_file,
-        ]
-    )
-    shapes_graph = load_graph([root / "shapes" / "policy_shapes.ttl"])
+    ontology_path = root / "data" / "ontology.ttl"
+    enterprise_path = root / "data" / "enterprise.ttl"
+    shapes_path = root / "shapes" / "policy_shapes.ttl"
 
-    # IMPORTANT:
-    # pySHACL uses inference="owlrl" to materialize OWL/RDFS entailments
-    # before SHACL validation. This lets SHACL see inferred facts such as:
-    # srv_123 a ProductionServer.
+    # Load graphs separately to distinguish asserted vs inferred facts
+    scenario_only_graph = Graph()
+    scenario_only_graph.parse(str(scenario_file), format="turtle")
+
+    enterprise_graph = Graph()
+    enterprise_graph.parse(str(enterprise_path), format="turtle")
+
+    ontology_graph = Graph()
+    ontology_graph.parse(str(ontology_path), format="turtle")
+
+    # Combine into a single graph for validation
+    data_graph = Graph()
+    data_graph += ontology_graph
+    data_graph += enterprise_graph
+    data_graph += scenario_only_graph
+
+    shapes_graph = load_graph([shapes_path])
+
+    # Run validation. Set inplace=True to mutate data_graph with OWL RL inferences.
     conforms, results_graph, results_text = validate(
         data_graph=data_graph,
         shacl_graph=shapes_graph,
         inference="owlrl",
+        inplace=True,
         debug=debug,
         serialize_report_graph=False,
     )
 
     messages = _collect_messages(results_graph)
+    violated_shapes = _collect_violated_shapes(results_graph)
+    decision = decision_from_shapes(conforms, violated_shapes)
 
-    # Some pySHACL versions do not mutate the input graph unless inplace=True.
-    # This second pass is only for deterministic display of inferred types.
-    try:
-        validate(
-            data_graph=data_graph,
-            shacl_graph=shapes_graph,
-            inference="owlrl",
-            inplace=True,
-            debug=False,
-            serialize_report_graph=False,
-        )
-    except TypeError:
-        pass
-
-    inferred_types = _collect_inferred_types(data_graph)
-    decision = decision_from_messages(conforms, messages)
-
-    # Load the scenario file alone to extract asserted (input) facts
-    scenario_only_graph = Graph()
-    scenario_only_graph.parse(str(scenario_file), format="turtle")
+    inferred_types = _collect_inferred_types(
+        data_graph, scenario_only_graph, enterprise_graph
+    )
     asserted_facts = _collect_asserted_facts(scenario_only_graph)
-
-    violated_policy = _collect_violated_policy(results_graph)
+    violated_policy = violated_shapes[0] if violated_shapes else ""
 
     return PolicyResult(
         scenario=scenario_file.stem,

@@ -26,6 +26,7 @@ class PolicyResult:
     raw_query: str
     asserted_facts: List[str] = field(default_factory=list)
     violated_policy: str = ""
+    inferred_types: List[str] = field(default_factory=list)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -75,8 +76,8 @@ _QUERY = "x = data.agent_policy.decision"
 _POLICY_PATH = "policies/agent_policy.rego"
 
 
-def _evaluate(policy_text: str, input_data: dict, root: Path) -> str:
-    """Run the Rego policy against *input_data* and return the decision string."""
+def _evaluate(policy_text: str, input_data: dict, root: Path) -> tuple[str, List[str]]:
+    """Run the Rego policy against *input_data* and return (decision, inferred_types)."""
     rego = Interpreter()
     rego.add_module("agent_policy", policy_text)
     
@@ -90,13 +91,32 @@ def _evaluate(policy_text: str, input_data: dict, root: Path) -> str:
 
     result = rego.query(_QUERY)
 
-    # regopy 1.x returns an Output object instead of a dict.
+    decision = "REQUIRE_CLARIFICATION"
     if result:
         x_node = result.binding("x")
         if x_node is not None:
-            return json.loads(str(x_node))
+            decision = json.loads(str(x_node))
 
-    return "REQUIRE_CLARIFICATION"
+    # Dynamically check for derived classifications on targets
+    inferred_types = []
+    target = input_data.get("targets")
+    if target and isinstance(target, str):
+        # Query if target is production server
+        res_prod = rego.query(f"data.agent_policy.is_production_server(\"{target}\")")
+        if res_prod:
+            inferred_types.append(f"{target} is_production_server")
+
+        # Query if target is staging server
+        res_stag = rego.query(f"data.agent_policy.is_staging_server(\"{target}\")")
+        if res_stag:
+            inferred_types.append(f"{target} is_staging_server")
+
+        # Query if target is unverified finance skill
+        res_skill = rego.query(f"data.agent_policy.is_unverified_finance_skill(\"{target}\")")
+        if res_skill:
+            inferred_types.append(f"{target} is_unverified_finance_skill")
+
+    return decision, inferred_types
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -169,7 +189,7 @@ def run_policy_check(
     policy_text = (root / _POLICY_PATH).read_text(encoding="utf-8")
     input_data = json.loads(scenario_file.read_text(encoding="utf-8"))
 
-    decision = _evaluate(policy_text, input_data, root)
+    decision, inferred_types = _evaluate(policy_text, input_data, root)
     messages = _build_messages(decision, input_data)
     contrast_notes = _CONTRAST.get(scenario_file.stem, [])
     asserted_facts = _extract_asserted_facts(input_data)
@@ -183,4 +203,5 @@ def run_policy_check(
         raw_query=_QUERY,
         asserted_facts=asserted_facts,
         violated_policy=violated_policy,
+        inferred_types=inferred_types,
     )

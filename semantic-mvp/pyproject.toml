@@ -5,13 +5,13 @@ description = "Local MVP for RDF/OWL/SHACL semantic policy validation of AI agen
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "rdflib>=7.0.0",
-    "pyshacl>=0.26.0",
-    "owlrl>=6.0.2"
+    "rdflib==7.6.0",
+    "pyshacl==0.28.1",
+    "owlrl==6.0.2"
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0.0"]
+dev = ["pytest==8.3.5"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

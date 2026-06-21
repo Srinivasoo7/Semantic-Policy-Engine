@@ -26,6 +26,7 @@ class PolicyResult:
     raw_query: str
     asserted_facts: List[str] = field(default_factory=list)
     violated_policy: str = ""
+    inferred_types: List[str] = field(default_factory=list)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -176,4 +177,5 @@ def run_policy_check(
         raw_query=_QUERY,
         asserted_facts=asserted_facts,
         violated_policy=violated_policy,
+        inferred_types=[],
     )

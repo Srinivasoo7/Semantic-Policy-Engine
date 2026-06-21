@@ -54,11 +54,10 @@ def _get_explanation(system_name: str, system_root: Path, scenario_id: str) -> d
             scenario_file = system_root / "input" / f"{scenario_id}.json"
 
         result = run_policy_check(scenario_file, root=system_root)
-        # Each engine returns a PolicyResult; we extract what it can supply.
         return {
             "asserted_facts":  getattr(result, "asserted_facts", []),
             "inferred_facts":  getattr(result, "inferred_types", []),
-            "violated_policy": getattr(result, "messages", [""])[0] if getattr(result, "messages", []) else "",
+            "violated_policy": getattr(result, "violated_policy", ""),
             "decision_reason": getattr(result, "messages", [""])[-1] if getattr(result, "messages", []) else "",
         }
     except Exception as exc:

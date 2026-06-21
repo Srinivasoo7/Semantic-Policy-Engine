@@ -5,11 +5,11 @@ description = "OPA/Rego baseline for comparing manual vs. OWL-inferred semantic 
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "regopy>=0.3.0",
+    "regopy==1.4.0",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0.0"]
+dev = ["pytest==8.3.5"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

@@ -15,9 +15,10 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -r semantic-mvp/requirements.txt
+        run: pip install -e .
+        working-directory: semantic-mvp
       - name: Run tests
-        run: pytest semantic-mvp/tests/ -q
+        run: pytest tests/ -q
         working-directory: semantic-mvp
 
   test-opa-set:
@@ -29,9 +30,10 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -r opa-set-baseline/requirements.txt
+        run: pip install -e .
+        working-directory: opa-set-baseline
       - name: Run tests
-        run: pytest opa-set-baseline/tests/ -q
+        run: pytest tests/ -q
         working-directory: opa-set-baseline
 
   test-opa-derived:
@@ -43,7 +45,32 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -r opa-derived-baseline/requirements.txt
-      - name: Run tests
-        run: pytest opa-derived-baseline/tests/ -q
+        run: pip install -e .
         working-directory: opa-derived-baseline
+      - name: Run tests
+        run: pytest tests/ -q
+        working-directory: opa-derived-baseline
+
+  run-experiments:
+    name: Run Benchmark Experiments
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install all baselines in editable mode
+        run: |
+          pip install -e semantic-mvp/
+          pip install -e opa-set-baseline/
+          pip install -e opa-derived-baseline/
+      - name: Run decision accuracy experiment
+        run: python experiments/run_all_experiments.py
+      - name: Run maintainability experiment
+        run: python experiments/maintainability.py
+      - name: Run explanation quality experiment
+        run: python experiments/explanation_quality.py
+      - name: Run latency benchmark (1 iteration for quick sanity check in CI)
+        run: python experiments/latency.py --iterations 1
+      - name: Run table generator
+        run: python experiments/generate_tables.py

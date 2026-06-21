@@ -51,67 +51,71 @@ All three systems reach **behavioural parity** on the same scenario suite. The k
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.8+
 - Windows or Linux/macOS
-- `pip install -r semantic-mvp/requirements.txt`
-- `pip install -r opa-set-baseline/requirements.txt`
-- `pip install -r opa-derived-baseline/requirements.txt`
+- Install all baselines in editable mode:
+  ```bash
+  pip install -e semantic-mvp/
+  pip install -e opa-set-baseline/
+  pip install -e opa-derived-baseline/
+  ```
 
 ### Run all tests
 
+You can run individual test suites cleanly:
 ```bash
-# Semantic MVP
-cd semantic-mvp && pytest tests/ -q
-
-# OPA-set baseline
-cd ../opa-set-baseline && pytest tests/ -q
-
-# OPA-derived baseline
-cd ../opa-derived-baseline && pytest tests/ -q
+python -m pytest semantic-mvp/tests/ -q
+python -m pytest opa-set-baseline/tests/ -q
+python -m pytest opa-derived-baseline/tests/ -q
 ```
 
-### Run individual scenarios
+### Run the measurement harnesses & aggregate tables
 
 ```bash
-cd semantic-mvp
-python -m semantic_policy.cli restart_denied
-python -m semantic_policy.cli --all
+# Run accuracy, maintainability, explanation quality, and latency measurements
+python experiments/run_all_experiments.py
+python experiments/maintainability.py
+python experiments/explanation_quality.py
+python experiments/latency.py --iterations 10
+
+# Generate Markdown/LaTeX tables under results/tables/
+python experiments/generate_tables.py
 ```
 
 ---
 
-## Maintainability Results (Experiments 1–3)
+## Benchmark Tiers and Scenarios (32 Scenarios)
 
-| Experiment | RDF/OWL/SHACL edit | SHACL edits | OPA-set edit | OPA-derived edit | Result |
-|---|---:|---:|---:|---:|---|
-| Add `srv_999` | 1 RDF fact | 0 | 1 set update | 0 if JSON contains environment | Semantic and OPA-derived generalize; OPA-set needs set update |
-| Expand `ProductionServer` | 1 OWL definition edit | 0 | 1 set update | 1 Rego predicate update | Semantic keeps enforcement rules unchanged |
-| 3 policies depend on `ProductionServer` | 1 OWL edit + 1 fact | 0 across 3 policies | 1 classification update | 1 Rego predicate update | All systems match behavior; maintenance layer differs |
+Our expanded benchmark contains 32 curated scenarios spanning 8 different validation tiers. The table below presents theaggregated accuracy, average latency, and average explanation quality scores:
 
-### Edit type definitions
+| Tier | Tier Name | System | Accuracy | Avg Latency (ms) | Avg Explanation Score |
+| :---: | :--- | :--- | :---: | :---: | :---: |
+| **1** | Flat access | `rdf_owl_shacl` | 2/2 (100.0%) | ~606 ms | 3.00/5 |
+| **1** | Flat access | `opa_set` | 2/2 (100.0%) | ~11 ms | 2.00/5 |
+| **1** | Flat access | `opa_derived` | 2/2 (100.0%) | ~35 ms | 4.00/5 |
+| **2** | Attribute-based | `rdf_owl_shacl` | 4/4 (100.0%) | ~623 ms | 3.00/5 |
+| **2** | Attribute-based | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.00/5 |
+| **2** | Attribute-based | `opa_derived` | 4/4 (100.0%) | ~21 ms | 4.00/5 |
+| **4** | Relationship-dependent | `rdf_owl_shacl` | 5/5 (100.0%) | ~614 ms | 4.60/5 |
+| **4** | Relationship-dependent | `opa_set` | 5/5 (100.0%) | ~8 ms | 2.60/5 |
+| **4** | Relationship-dependent | `opa_derived` | 5/5 (100.0%) | ~23 ms | 4.60/5 |
+| **5** | State-dependent | `rdf_owl_shacl` | 4/4 (100.0%) | ~603 ms | 4.00/5 |
+| **5** | State-dependent | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.25/5 |
+| **5** | State-dependent | `opa_derived` | 4/4 (100.0%) | ~21 ms | 4.25/5 |
+| **6** | Exception/break-glass | `rdf_owl_shacl` | 4/4 (100.0%) | ~590 ms | 5.00/5 |
+| **6** | Exception/break-glass | `opa_set` | 4/4 (100.0%) | ~9 ms | 2.50/5 |
+| **6** | Exception/break-glass | `opa_derived` | 4/4 (100.0%) | ~24 ms | 4.50/5 |
+| **7** | Obligation | `rdf_owl_shacl` | 4/4 (100.0%) | ~593 ms | 4.00/5 |
+| **7** | Obligation | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.00/5 |
+| **7** | Obligation | `opa_derived` | 4/4 (100.0%) | ~22 ms | 4.00/5 |
+| **8** | Skill composition/provenance | `rdf_owl_shacl` | 5/5 (100.0%) | ~613 ms | 4.20/5 |
+| **8** | Skill composition/provenance | `opa_set` | 5/5 (100.0%) | ~9 ms | 2.60/5 |
+| **8** | Skill composition/provenance | `opa_derived` | 5/5 (100.0%) | ~23 ms | 4.60/5 |
+| **9** | Adversarial skill proposer | `rdf_owl_shacl` | 4/4 (100.0%) | ~598 ms | 5.00/5 |
+| **9** | Adversarial skill proposer | `opa_set` | 4/4 (100.0%) | ~7 ms | 3.00/5 |
+| **9** | Adversarial skill proposer | `opa_derived` | 4/4 (100.0%) | ~20 ms | 5.00/5 |
 
-| Edit type | Meaning |
-|---|---|
-| Data edit | Add or change enterprise facts |
-| Semantic edit | Change the definition of a domain class like `ProductionServer` |
-| Enforcement-policy edit | Change SHACL shape or Rego allow/deny rule |
-| Classification-code edit | Change Rego predicate such as `is_production_server()` |
-
----
-
-## Core Scenarios (9)
-
-| Scenario | Expected Decision | Tier |
-|---|---|---|
-| `restart_denied` | `REQUIRE_APPROVAL` | 4 |
-| `restart_allowed` | `ALLOW` | 4 |
-| `restart_staging_allowed` | `ALLOW` | 2 |
-| `skill_preload_review` | `REQUIRE_APPROVAL` | 8 |
-| `skill_postload_denied` | `DENY` | 8 |
-| `restart_new_prod_server` | `REQUIRE_APPROVAL` | 4 |
-| `restart_customer_facing` | `REQUIRE_APPROVAL` | 4 |
-| `deploy_prod` | `REQUIRE_APPROVAL` | 4 |
-| `query_logs_prod` | `ALLOW_WITH_OBLIGATION` | 7 |
+See `results/tables/comparison_table.md` for individual scenario results.
 
 ---
 

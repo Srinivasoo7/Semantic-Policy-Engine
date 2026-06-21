@@ -5,7 +5,7 @@ title: "Semantic Policy Agent Governance"
 abstract: >
   A comparative study of RDF/OWL/SHACL, OPA-set, and OPA-derived baselines
   for governing AI agent actions. Evaluates decision accuracy, explanation quality,
-  latency, and maintainability across a curated benchmark of 36+ scenarios.
+  latency, and maintainability across a curated benchmark of 32 scenarios.
 keywords:
   - AI agent governance
   - policy validation
