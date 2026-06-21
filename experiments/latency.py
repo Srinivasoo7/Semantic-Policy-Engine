@@ -35,34 +35,6 @@ SYSTEMS = [
 ]
 
 
-def _run_once(system_name: str, system_root: Path, scenario_id: str) -> float:
-    import sys
-    for key in list(sys.modules.keys()):
-        if key.startswith("opa_policy") or key.startswith("semantic_policy"):
-            del sys.modules[key]
-            
-    src = system_root / "src"
-    if str(src) not in sys.path:
-        sys.path.insert(0, str(src))
-    try:
-        if system_name == "rdf_owl_shacl":
-            from semantic_policy.engine import run_policy_check
-            scenario_file = system_root / "data" / "scenarios" / f"{scenario_id}.ttl"
-        else:
-            from opa_policy.engine import run_policy_check
-            scenario_file = system_root / "input" / f"{scenario_id}.json"
-
-        t0 = time.perf_counter()
-        run_policy_check(scenario_file, root=system_root)
-        return (time.perf_counter() - t0) * 1000
-    except Exception as exc:
-        print(f"  [ERROR] {system_name}/{scenario_id}: {exc}")
-        return float("nan")
-    finally:
-        if str(src) in sys.path:
-            sys.path.remove(str(src))
-
-
 def benchmark(iterations: int = 100) -> list[dict]:
     if not EXPECTED_DIR.exists():
         print(f"[WARN] benchmark/expected/ not populated yet.")
@@ -74,7 +46,40 @@ def benchmark(iterations: int = 100) -> list[dict]:
         scenario_id = expected["scenario_id"]
         for system_name, system_root in SYSTEMS:
             print(f"  Benchmarking {system_name}/{scenario_id} × {iterations}...")
-            times = [_run_once(system_name, system_root, scenario_id) for _ in range(iterations)]
+            
+            # Setup imports once per system-scenario
+            import sys
+            for key in list(sys.modules.keys()):
+                if key.startswith("opa_policy") or key.startswith("semantic_policy"):
+                    del sys.modules[key]
+            src = system_root / "src"
+            if str(src) not in sys.path:
+                sys.path.insert(0, str(src))
+                
+            times = []
+            try:
+                if system_name == "rdf_owl_shacl":
+                    from semantic_policy.engine import run_policy_check
+                    scenario_file = system_root / "data" / "scenarios" / f"{scenario_id}.ttl"
+                else:
+                    from opa_policy.engine import run_policy_check
+                    scenario_file = system_root / "input" / f"{scenario_id}.json"
+                
+                # Warm up once
+                run_policy_check(scenario_file, root=system_root)
+                
+                # Run iterations
+                for _ in range(iterations):
+                    t0 = time.perf_counter()
+                    run_policy_check(scenario_file, root=system_root)
+                    times.append((time.perf_counter() - t0) * 1000)
+            except Exception as exc:
+                print(f"  [ERROR] {system_name}/{scenario_id}: {exc}")
+                times = [float("nan")] * iterations
+            finally:
+                if str(src) in sys.path:
+                    sys.path.remove(str(src))
+            
             valid = [t for t in times if t == t]  # filter NaN
             if not valid:
                 median, p95 = float("nan"), float("nan")

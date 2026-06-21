@@ -90,30 +90,30 @@ Our expanded benchmark contains 32 curated scenarios spanning 8 different valida
 
 | Tier | Tier Name | System | Accuracy | Avg Latency (ms) | Avg Explanation Score |
 | :---: | :--- | :--- | :---: | :---: | :---: |
-| **1** | Flat access | `rdf_owl_shacl` | 2/2 (100.0%) | ~606 ms | 3.00/5 |
-| **1** | Flat access | `opa_set` | 2/2 (100.0%) | ~11 ms | 2.00/5 |
-| **1** | Flat access | `opa_derived` | 2/2 (100.0%) | ~35 ms | 4.00/5 |
-| **2** | Attribute-based | `rdf_owl_shacl` | 4/4 (100.0%) | ~623 ms | 3.00/5 |
-| **2** | Attribute-based | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.00/5 |
-| **2** | Attribute-based | `opa_derived` | 4/4 (100.0%) | ~21 ms | 4.00/5 |
-| **4** | Relationship-dependent | `rdf_owl_shacl` | 5/5 (100.0%) | ~614 ms | 4.60/5 |
-| **4** | Relationship-dependent | `opa_set` | 5/5 (100.0%) | ~8 ms | 2.60/5 |
-| **4** | Relationship-dependent | `opa_derived` | 5/5 (100.0%) | ~23 ms | 4.60/5 |
-| **5** | State-dependent | `rdf_owl_shacl` | 4/4 (100.0%) | ~603 ms | 4.00/5 |
-| **5** | State-dependent | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.25/5 |
-| **5** | State-dependent | `opa_derived` | 4/4 (100.0%) | ~21 ms | 4.25/5 |
-| **6** | Exception/break-glass | `rdf_owl_shacl` | 4/4 (100.0%) | ~590 ms | 5.00/5 |
-| **6** | Exception/break-glass | `opa_set` | 4/4 (100.0%) | ~9 ms | 2.50/5 |
-| **6** | Exception/break-glass | `opa_derived` | 4/4 (100.0%) | ~24 ms | 4.50/5 |
-| **7** | Obligation | `rdf_owl_shacl` | 4/4 (100.0%) | ~593 ms | 4.00/5 |
-| **7** | Obligation | `opa_set` | 4/4 (100.0%) | ~8 ms | 2.00/5 |
-| **7** | Obligation | `opa_derived` | 4/4 (100.0%) | ~22 ms | 4.00/5 |
-| **8** | Skill composition/provenance | `rdf_owl_shacl` | 5/5 (100.0%) | ~613 ms | 4.20/5 |
-| **8** | Skill composition/provenance | `opa_set` | 5/5 (100.0%) | ~9 ms | 2.60/5 |
-| **8** | Skill composition/provenance | `opa_derived` | 5/5 (100.0%) | ~23 ms | 4.60/5 |
-| **9** | Adversarial skill proposer | `rdf_owl_shacl` | 4/4 (100.0%) | ~598 ms | 5.00/5 |
-| **9** | Adversarial skill proposer | `opa_set` | 4/4 (100.0%) | ~7 ms | 3.00/5 |
-| **9** | Adversarial skill proposer | `opa_derived` | 4/4 (100.0%) | ~20 ms | 5.00/5 |
+| **1** | Flat access | `rdf_owl_shacl` | 2/2 (100.0%) | ~728.38 ms | 4.00/5 |
+| **1** | Flat access | `opa_set` | 2/2 (100.0%) | ~8.51 ms | 2.00/5 |
+| **1** | Flat access | `opa_derived` | 2/2 (100.0%) | ~91.90 ms | 4.00/5 |
+| **2** | Attribute-based | `rdf_owl_shacl` | 4/4 (100.0%) | ~600.03 ms | 4.00/5 |
+| **2** | Attribute-based | `opa_set` | 4/4 (100.0%) | ~10.04 ms | 2.00/5 |
+| **2** | Attribute-based | `opa_derived` | 4/4 (100.0%) | ~84.46 ms | 4.00/5 |
+| **4** | Relationship-dependent | `rdf_owl_shacl` | 5/5 (100.0%) | ~628.59 ms | 4.80/5 |
+| **4** | Relationship-dependent | `opa_set` | 5/5 (100.0%) | ~7.88 ms | 2.60/5 |
+| **4** | Relationship-dependent | `opa_derived` | 5/5 (100.0%) | ~80.79 ms | 4.60/5 |
+| **5** | State-dependent | `rdf_owl_shacl` | 4/4 (100.0%) | ~630.42 ms | 4.50/5 |
+| **5** | State-dependent | `opa_set` | 4/4 (100.0%) | ~7.55 ms | 2.25/5 |
+| **5** | State-dependent | `opa_derived` | 4/4 (100.0%) | ~75.00 ms | 4.25/5 |
+| **6** | Exception/break-glass | `rdf_owl_shacl` | 4/4 (100.0%) | ~619.80 ms | 5.00/5 |
+| **6** | Exception/break-glass | `opa_set` | 4/4 (100.0%) | ~7.40 ms | 2.50/5 |
+| **6** | Exception/break-glass | `opa_derived` | 4/4 (100.0%) | ~73.79 ms | 4.50/5 |
+| **7** | Obligation | `rdf_owl_shacl` | 4/4 (100.0%) | ~578.55 ms | 4.50/5 |
+| **7** | Obligation | `opa_set` | 4/4 (100.0%) | ~7.52 ms | 2.00/5 |
+| **7** | Obligation | `opa_derived` | 4/4 (100.0%) | ~79.27 ms | 4.00/5 |
+| **8** | Skill composition/provenance | `rdf_owl_shacl` | 5/5 (100.0%) | ~691.46 ms | 4.60/5 |
+| **8** | Skill composition/provenance | `opa_set` | 5/5 (100.0%) | ~8.74 ms | 2.60/5 |
+| **8** | Skill composition/provenance | `opa_derived` | 5/5 (100.0%) | ~87.24 ms | 4.60/5 |
+| **9** | Adversarial skill proposer | `rdf_owl_shacl` | 4/4 (100.0%) | ~711.19 ms | 5.00/5 |
+| **9** | Adversarial skill proposer | `opa_set` | 4/4 (100.0%) | ~8.36 ms | 3.00/5 |
+| **9** | Adversarial skill proposer | `opa_derived` | 4/4 (100.0%) | ~126.54 ms | 5.00/5 |
 
 See `results/tables/comparison_table.md` for individual scenario results.
 

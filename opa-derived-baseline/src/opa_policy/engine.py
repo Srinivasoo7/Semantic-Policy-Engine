@@ -97,25 +97,36 @@ def _evaluate(policy_text: str, input_data: dict, root: Path) -> tuple[str, List
         if x_node is not None:
             decision = json.loads(str(x_node))
 
-    # Dynamically check for derived classifications on targets
-    inferred_types = []
+    # Dynamically check for derived classifications on all entities in the enterprise database
+    import re
+    # Scan the policy text for all classification predicates starts with is_
+    rule_names = re.findall(r"\b(is_[a-zA-Z0-9_]+)\(", policy_text)
+    rule_names = sorted(list(set(rule_names)))
+
+    # Collect all potential entities from enterprise data
+    entities = []
+    if "servers" in enterprise_data:
+        entities.extend(enterprise_data["servers"].keys())
+    if "skills" in enterprise_data:
+        entities.extend(enterprise_data["skills"].keys())
+    # Also add the target from input data if it's not already there
     target = input_data.get("targets")
-    if target and isinstance(target, str):
-        # Query if target is production server
-        res_prod = rego.query(f"data.agent_policy.is_production_server(\"{target}\")")
-        if res_prod:
-            inferred_types.append(f"{target} is_production_server")
+    if target and isinstance(target, str) and target not in entities:
+        entities.append(target)
 
-        # Query if target is staging server
-        res_stag = rego.query(f"data.agent_policy.is_staging_server(\"{target}\")")
-        if res_stag:
-            inferred_types.append(f"{target} is_staging_server")
+    inferred_types = []
+    for ent in entities:
+        for rule in rule_names:
+            res = rego.query(f'data.agent_policy.{rule}("{ent}")')
+            if res and str(res) != "undefined":
+                # Convert rule name to CamelCase Class Name (e.g. is_production_server -> ProductionServer)
+                parts = rule.split("_")
+                if parts[0] == "is":
+                    parts = parts[1:]
+                class_name = "".join(p.capitalize() for p in parts)
+                inferred_types.append(f"{ent} a {class_name}")
 
-        # Query if target is unverified finance skill
-        res_skill = rego.query(f"data.agent_policy.is_unverified_finance_skill(\"{target}\")")
-        if res_skill:
-            inferred_types.append(f"{target} is_unverified_finance_skill")
-
+    inferred_types = sorted(list(set(inferred_types)))
     return decision, inferred_types
 
 
@@ -169,7 +180,6 @@ def _extract_violated_policy(decision: str) -> str:
         "DENY": "_deny",
         "REQUIRE_APPROVAL": "_require_approval",
         "ALLOW_WITH_OBLIGATION": "_allow_with_obligation",
-        "ALLOW": "_allow",
     }
     return mapping.get(decision, "")
 

@@ -55,6 +55,7 @@ def _get_explanation(system_name: str, system_root: Path, scenario_id: str) -> d
 
         result = run_policy_check(scenario_file, root=system_root)
         return {
+            "decision":        getattr(result, "decision", ""),
             "asserted_facts":  getattr(result, "asserted_facts", []),
             "inferred_facts":  getattr(result, "inferred_types", []),
             "violated_policy": getattr(result, "violated_policy", ""),
@@ -62,23 +63,32 @@ def _get_explanation(system_name: str, system_root: Path, scenario_id: str) -> d
         }
     except Exception as exc:
         print(f"  [ERROR] {system_name}/{scenario_id}: {exc}")
-        return {"asserted_facts": [], "inferred_facts": [], "violated_policy": "", "decision_reason": ""}
+        return {"decision": "", "asserted_facts": [], "inferred_facts": [], "violated_policy": "", "decision_reason": ""}
     finally:
         if str(src) in sys.path:
             sys.path.remove(str(src))
 
 
 def score_explanation(expl: dict, reconstructable: int = 0) -> dict:
+    decision = expl.get("decision", "ALLOW")
+    
+    # c3 is violated_policy. For ALLOW decisions, it is high quality (1) if it is correctly empty.
+    # For non-ALLOW decisions, it is high quality (1) if it is non-empty.
+    if decision == "ALLOW":
+        has_violated_policy = 1 if not expl.get("violated_policy") else 0
+    else:
+        has_violated_policy = 1 if expl.get("violated_policy") else 0
+
     return {
         "c1_asserted_facts":   1 if expl.get("asserted_facts") else 0,
         "c2_inferred_facts":   1 if expl.get("inferred_facts") else 0,
-        "c3_violated_policy":  1 if expl.get("violated_policy") else 0,
+        "c3_violated_policy":  has_violated_policy,
         "c4_decision_reason":  1 if expl.get("decision_reason") else 0,
         "c5_reconstructable":  reconstructable,
         "total_score":         (
             (1 if expl.get("asserted_facts") else 0) +
             (1 if expl.get("inferred_facts") else 0) +
-            (1 if expl.get("violated_policy") else 0) +
+            has_violated_policy +
             (1 if expl.get("decision_reason") else 0) +
             reconstructable
         ),

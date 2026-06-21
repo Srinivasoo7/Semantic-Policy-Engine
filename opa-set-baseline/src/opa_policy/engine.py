@@ -143,7 +143,6 @@ def _extract_violated_policy(decision: str) -> str:
         "DENY": "_deny",
         "REQUIRE_APPROVAL": "_require_approval",
         "ALLOW_WITH_OBLIGATION": "_allow_with_obligation",
-        "ALLOW": "_allow",
     }
     return mapping.get(decision, "")
 

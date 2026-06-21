@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -e ".[dev]"
         working-directory: semantic-mvp
       - name: Run tests
         run: pytest tests/ -q
@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -e ".[dev]"
         working-directory: opa-set-baseline
       - name: Run tests
         run: pytest tests/ -q
@@ -45,7 +45,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -e ".[dev]"
         working-directory: opa-derived-baseline
       - name: Run tests
         run: pytest tests/ -q
