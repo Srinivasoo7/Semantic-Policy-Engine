@@ -86,36 +86,11 @@ python experiments/generate_tables.py
 
 ## Benchmark Tiers and Scenarios (32 Scenarios)
 
-Our expanded benchmark contains 32 curated scenarios spanning 8 different validation tiers. The table below presents theaggregated accuracy, average latency, and average explanation quality scores:
+Our expanded benchmark contains 32 curated scenarios spanning 8 different validation tiers. 
 
-| Tier | Tier Name | System | Accuracy | Avg Latency (ms) | Avg Explanation Score |
-| :---: | :--- | :--- | :---: | :---: | :---: |
-| **1** | Flat access | `rdf_owl_shacl` | 2/2 (100.0%) | ~707.48 ms | 4.00/5 |
-| **1** | Flat access | `opa_set` | 2/2 (100.0%) | ~9.15 ms | 2.00/5 |
-| **1** | Flat access | `opa_derived` | 2/2 (100.0%) | ~106.58 ms | 4.00/5 |
-| **2** | Attribute-based | `rdf_owl_shacl` | 4/4 (100.0%) | ~575.40 ms | 4.00/5 |
-| **2** | Attribute-based | `opa_set` | 4/4 (100.0%) | ~7.60 ms | 2.00/5 |
-| **2** | Attribute-based | `opa_derived` | 4/4 (100.0%) | ~77.06 ms | 4.00/5 |
-| **3** | Relationship-dependent | `rdf_owl_shacl` | 5/5 (100.0%) | ~634.20 ms | 4.80/5 |
-| **3** | Relationship-dependent | `opa_set` | 5/5 (100.0%) | ~8.82 ms | 2.60/5 |
-| **3** | Relationship-dependent | `opa_derived` | 5/5 (100.0%) | ~80.55 ms | 4.60/5 |
-| **4** | State-dependent | `rdf_owl_shacl` | 4/4 (100.0%) | ~626.09 ms | 4.50/5 |
-| **4** | State-dependent | `opa_set` | 4/4 (100.0%) | ~8.96 ms | 2.25/5 |
-| **4** | State-dependent | `opa_derived` | 4/4 (100.0%) | ~81.79 ms | 4.25/5 |
-| **5** | Exception/break-glass | `rdf_owl_shacl` | 4/4 (100.0%) | ~615.65 ms | 5.00/5 |
-| **5** | Exception/break-glass | `opa_set` | 4/4 (100.0%) | ~8.93 ms | 2.50/5 |
-| **5** | Exception/break-glass | `opa_derived` | 4/4 (100.0%) | ~82.93 ms | 4.50/5 |
-| **6** | Obligation | `rdf_owl_shacl` | 4/4 (100.0%) | ~630.06 ms | 4.50/5 |
-| **6** | Obligation | `opa_set` | 4/4 (100.0%) | ~9.30 ms | 2.00/5 |
-| **6** | Obligation | `opa_derived` | 4/4 (100.0%) | ~99.19 ms | 4.00/5 |
-| **7** | Skill composition/provenance | `rdf_owl_shacl` | 5/5 (100.0%) | ~672.96 ms | 4.60/5 |
-| **7** | Skill composition/provenance | `opa_set` | 5/5 (100.0%) | ~6.70 ms | 2.60/5 |
-| **7** | Skill composition/provenance | `opa_derived` | 5/5 (100.0%) | ~79.77 ms | 4.60/5 |
-| **8** | Adversarial skill proposer | `rdf_owl_shacl` | 4/4 (100.0%) | ~629.92 ms | 5.00/5 |
-| **8** | Adversarial skill proposer | `opa_set` | 4/4 (100.0%) | ~7.42 ms | 3.00/5 |
-| **8** | Adversarial skill proposer | `opa_derived` | 4/4 (100.0%) | ~76.77 ms | 5.00/5 |
-
-See `results/tables/comparison_table.md` for individual scenario results.
+To prevent stale results duplication, the generated benchmark metric tables are located under the results directory:
+- **Aggregated Results**: [results/tables/tier_summary.md](file:///d:/Finance_Stocks/semantic-policy-agent-governance/results/tables/tier_summary.md) (Tier-wise aggregated summary)
+- **Detailed Scenario Results**: [results/tables/comparison_table.md](file:///d:/Finance_Stocks/semantic-policy-agent-governance/results/tables/comparison_table.md) (Individual results per system and scenario)
 
 ---
 

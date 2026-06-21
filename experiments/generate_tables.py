@@ -143,7 +143,7 @@ def main():
     md_summary = [
         "# Tier-wise Aggregated Summary",
         "",
-        "| Tier | Tier Name | System | Accuracy | Avg Latency (ms) | Avg Explanation Score |",
+        "| Tier | Tier Name | System | Accuracy | Median Latency (ms) | Avg Explanation Score |",
         "| :--- | :--- | :--- | :--- | :--- | :--- |"
     ]
     for (t_val, t_name) in sorted(tiers_summary.keys()):

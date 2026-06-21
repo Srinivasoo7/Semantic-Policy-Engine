@@ -1,6 +1,6 @@
 # Tier-wise Aggregated Summary
 
-| Tier | Tier Name | System | Accuracy | Avg Latency (ms) | Avg Explanation Score |
+| Tier | Tier Name | System | Accuracy | Median Latency (ms) | Avg Explanation Score |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | Flat access | `rdf_owl_shacl` | 2/2 (100.0%) | 605.14 | 4.00/5 |
 | 1 | Flat access | `opa_set` | 2/2 (100.0%) | 8.13 | 2.00/5 |
