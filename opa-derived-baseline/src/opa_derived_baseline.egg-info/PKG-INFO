@@ -1,3 +1,13 @@
+Metadata-Version: 2.1
+Name: opa-derived-baseline
+Version: 0.1.0
+Summary: OPA/Rego baseline for comparing manual vs. OWL-inferred semantic policy encoding
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: regopy==1.4.0
+Provides-Extra: dev
+Requires-Dist: pytest==8.3.5; extra == "dev"
+
 # OPA-derived Policy Baseline
 
 Companion project to [`semantic-mvp`](../semantic-mvp/).

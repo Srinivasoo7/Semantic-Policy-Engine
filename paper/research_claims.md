@@ -17,9 +17,9 @@ This is a **maintainability and explanation** claim, not a raw accuracy superior
 
 | ID  | Hypothesis                                                                                                 | Evidence strategy                                                             |
 |-----|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| H3  | RDF/OWL/SHACL produces richer, more reconstructable explanations than policy-as-code baselines             | Explanation-quality metric across all 3 systems                               |
+| H3  | RDF/OWL/SHACL can produce richer, more reconstructable explanations than simple policy-as-code baselines (though modular OPA architectures with structured schemas can achieve comparable depth) | Explanation-quality metric across all 3 systems                               |
 | H4  | RDF/OWL/SHACL requires fewer enforcement-policy edits when semantic class definitions change               | Maintainability metrics M1–M5 across E1–E3                                    |
-| RQ6 | The latency overhead of OWL inference + SHACL validation is acceptable for agent-action gating use cases  | Latency benchmark across 100/500/1000 iterations on all 9+ core scenarios     |
+| RQ6 | The latency overhead of OWL inference + SHACL validation (measured in our cold-evaluation prototype) is acceptable for non-realtime agent-action gating, rather than highly performant realtime paths | Latency benchmark across 100/500/1000 iterations on all 8 core scenarios      |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "scenario_id": "skill_unknown_provenance_review",
-  "tier": 8,
+  "tier": 7,
   "tier_name": "Skill composition/provenance",
   "action_type": "SkillInvocation",
   "requested_by": "user_123",

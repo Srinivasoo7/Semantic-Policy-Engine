@@ -1,97 +1,97 @@
 scenario_id,tier,tier_name,system,m1_enforcement_policy_edits,m2_semantic_edits,m3_data_edits,m4_classification_code_edits,m5_dependent_policies_affected
-deploy_break_glass_allowed,6,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
-deploy_break_glass_allowed,6,Exception/break-glass,opa_set,0,0,0,0,0
-deploy_break_glass_allowed,6,Exception/break-glass,opa_derived,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,rdf_owl_shacl,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,opa_set,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,opa_derived,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,opa_set,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,opa_derived,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,rdf_owl_shacl,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,opa_set,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,opa_derived,0,0,0,0,0
-deploy_prod,4,Relationship-dependent,rdf_owl_shacl,0,1,1,0,3
-deploy_prod,4,Relationship-dependent,opa_set,0,0,1,1,0
-deploy_prod,4,Relationship-dependent,opa_derived,0,0,1,1,0
+deploy_break_glass_allowed,5,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
+deploy_break_glass_allowed,5,Exception/break-glass,opa_set,0,0,0,0,0
+deploy_break_glass_allowed,5,Exception/break-glass,opa_derived,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,opa_set,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,opa_derived,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,opa_set,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,opa_derived,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,opa_set,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,opa_derived,0,0,0,0,0
+deploy_prod,3,Relationship-dependent,rdf_owl_shacl,0,1,1,0,3
+deploy_prod,3,Relationship-dependent,opa_set,0,0,1,1,0
+deploy_prod,3,Relationship-dependent,opa_derived,0,0,1,1,0
 deploy_prod_approved,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 deploy_prod_approved,2,Attribute-based,opa_set,0,0,0,0,0
 deploy_prod_approved,2,Attribute-based,opa_derived,0,0,0,0,0
 deploy_staging_allowed,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 deploy_staging_allowed,2,Attribute-based,opa_set,0,0,0,0,0
 deploy_staging_allowed,2,Attribute-based,opa_derived,0,0,0,0,0
-query_logs_prod,7,Obligation,rdf_owl_shacl,0,1,1,0,3
-query_logs_prod,7,Obligation,opa_set,0,0,1,1,0
-query_logs_prod,7,Obligation,opa_derived,0,0,1,1,0
-query_logs_sensitive_obligation,7,Obligation,rdf_owl_shacl,0,0,0,0,0
-query_logs_sensitive_obligation,7,Obligation,opa_set,0,0,0,0,0
-query_logs_sensitive_obligation,7,Obligation,opa_derived,0,0,0,0,0
+query_logs_prod,6,Obligation,rdf_owl_shacl,0,1,1,0,3
+query_logs_prod,6,Obligation,opa_set,0,0,1,1,0
+query_logs_prod,6,Obligation,opa_derived,0,0,1,1,0
+query_logs_sensitive_obligation,6,Obligation,rdf_owl_shacl,0,0,0,0,0
+query_logs_sensitive_obligation,6,Obligation,opa_set,0,0,0,0,0
+query_logs_sensitive_obligation,6,Obligation,opa_derived,0,0,0,0,0
 query_logs_staging_allowed,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 query_logs_staging_allowed,2,Attribute-based,opa_set,0,0,0,0,0
 query_logs_staging_allowed,2,Attribute-based,opa_derived,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,rdf_owl_shacl,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,opa_set,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,opa_derived,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,rdf_owl_shacl,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,opa_set,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,opa_derived,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,rdf_owl_shacl,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,opa_set,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,opa_derived,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,rdf_owl_shacl,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,opa_set,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,opa_derived,0,0,0,0,0
 read_public_allowed,1,Flat access,rdf_owl_shacl,0,0,0,0,0
 read_public_allowed,1,Flat access,opa_set,0,0,0,0,0
 read_public_allowed,1,Flat access,opa_derived,0,0,0,0,0
-restart_active_incident,5,State-dependent,rdf_owl_shacl,0,0,0,0,0
-restart_active_incident,5,State-dependent,opa_set,0,0,0,0,0
-restart_active_incident,5,State-dependent,opa_derived,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,rdf_owl_shacl,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,opa_set,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,opa_derived,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,opa_set,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,opa_derived,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,opa_set,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,opa_derived,0,0,0,0,0
-restart_customer_facing,4,Relationship-dependent,rdf_owl_shacl,0,1,1,0,1
-restart_customer_facing,4,Relationship-dependent,opa_set,0,0,1,1,0
-restart_customer_facing,4,Relationship-dependent,opa_derived,0,0,1,1,0
-restart_denied,4,Relationship-dependent,rdf_owl_shacl,0,0,0,0,0
-restart_denied,4,Relationship-dependent,opa_set,0,0,0,0,0
-restart_denied,4,Relationship-dependent,opa_derived,0,0,0,0,0
+restart_active_incident,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
+restart_active_incident,4,State-dependent,opa_set,0,0,0,0,0
+restart_active_incident,4,State-dependent,opa_derived,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,rdf_owl_shacl,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,opa_set,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,opa_derived,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,opa_set,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,opa_derived,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,rdf_owl_shacl,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,opa_set,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,opa_derived,0,0,0,0,0
+restart_customer_facing,3,Relationship-dependent,rdf_owl_shacl,0,1,1,0,1
+restart_customer_facing,3,Relationship-dependent,opa_set,0,0,1,1,0
+restart_customer_facing,3,Relationship-dependent,opa_derived,0,0,1,1,0
+restart_denied,3,Relationship-dependent,rdf_owl_shacl,0,0,0,0,0
+restart_denied,3,Relationship-dependent,opa_set,0,0,0,0,0
+restart_denied,3,Relationship-dependent,opa_derived,0,0,0,0,0
 restart_dev_allowed,1,Flat access,rdf_owl_shacl,0,0,0,0,0
 restart_dev_allowed,1,Flat access,opa_set,0,0,0,0,0
 restart_dev_allowed,1,Flat access,opa_derived,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,rdf_owl_shacl,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,opa_set,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,opa_derived,0,0,0,0,0
-restart_new_prod_server,4,Relationship-dependent,rdf_owl_shacl,0,0,1,0,1
-restart_new_prod_server,4,Relationship-dependent,opa_set,0,0,1,1,0
-restart_new_prod_server,4,Relationship-dependent,opa_derived,0,0,1,0,0
+restart_in_maintenance_allowed,4,State-dependent,rdf_owl_shacl,0,0,0,0,0
+restart_in_maintenance_allowed,4,State-dependent,opa_set,0,0,0,0,0
+restart_in_maintenance_allowed,4,State-dependent,opa_derived,0,0,0,0,0
+restart_new_prod_server,3,Relationship-dependent,rdf_owl_shacl,0,0,1,0,1
+restart_new_prod_server,3,Relationship-dependent,opa_set,0,0,1,1,0
+restart_new_prod_server,3,Relationship-dependent,opa_derived,0,0,1,0,0
 restart_staging_allowed,2,Attribute-based,rdf_owl_shacl,0,0,0,0,0
 restart_staging_allowed,2,Attribute-based,opa_set,0,0,0,0,0
 restart_staging_allowed,2,Attribute-based,opa_derived,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,opa_set,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,opa_derived,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,opa_set,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,opa_derived,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,opa_set,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,opa_derived,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,opa_set,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,opa_derived,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,opa_set,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,opa_derived,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,opa_set,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,opa_derived,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,opa_set,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,opa_derived,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,opa_set,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,opa_derived,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,opa_set,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,opa_derived,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,opa_set,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,opa_derived,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,opa_set,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,opa_derived,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,opa_set,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,opa_derived,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,opa_set,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,opa_derived,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,opa_set,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,opa_derived,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,opa_set,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,opa_derived,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,rdf_owl_shacl,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,opa_set,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,opa_derived,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,opa_set,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,opa_derived,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,rdf_owl_shacl,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,opa_set,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,opa_derived,0,0,0,0,0

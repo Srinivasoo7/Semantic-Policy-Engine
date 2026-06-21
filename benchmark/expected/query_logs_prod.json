@@ -1,6 +1,6 @@
 {
   "scenario_id": "query_logs_prod",
-  "tier": 7,
+  "tier": 6,
   "tier_name": "Obligation",
   "action_type": "QueryLogsAction",
   "requested_by": "user_123",
@@ -30,5 +30,7 @@
     "m4_classification_code_edits": 1,
     "m5_dependent_policies_affected": 0
   },
-  "reconstructable_rdf_owl_shacl": 1, "reconstructable_opa_set": 0, "reconstructable_opa_derived": 1
+  "reconstructable_rdf_owl_shacl": 1,
+  "reconstructable_opa_set": 0,
+  "reconstructable_opa_derived": 1
 }

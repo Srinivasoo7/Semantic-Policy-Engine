@@ -1,6 +1,6 @@
 {
   "scenario_id": "deploy_break_glass_allowed",
-  "tier": 6,
+  "tier": 5,
   "tier_name": "Exception/break-glass",
   "action_type": "DeployAction",
   "requested_by": "user_123",

@@ -1,6 +1,6 @@
 {
   "scenario_id": "query_logs_sensitive_obligation",
-  "tier": 7,
+  "tier": 6,
   "tier_name": "Obligation",
   "action_type": "QueryLogsAction",
   "requested_by": "user_123",

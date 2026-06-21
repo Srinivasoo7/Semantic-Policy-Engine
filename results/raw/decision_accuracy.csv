@@ -1,97 +1,97 @@
 scenario_id,tier,tier_name,system,expected_decision,actual_decision,correct,latency_ms,m1_enforcement_policy_edits,m2_semantic_edits,m3_data_edits,m4_classification_code_edits,m5_dependent_policies_affected
-deploy_break_glass_allowed,6,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,1691.93,0,0,0,0,0
-deploy_break_glass_allowed,6,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,30.05,0,0,0,0,0
-deploy_break_glass_allowed,6,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,79.28,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,620.87,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.33,0,0,0,0,0
-deploy_during_freeze_denied,5,State-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,80.91,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,627.58,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,13.66,0,0,0,0,0
-deploy_no_exception_denied,6,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,93.67,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,599.4,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,opa_set,ALLOW,ALLOW,True,12.18,0,0,0,0,0
-deploy_no_freeze_allowed,5,State-dependent,opa_derived,ALLOW,ALLOW,True,91.22,0,0,0,0,0
-deploy_prod,4,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,598.85,0,0,0,0,0
-deploy_prod,4,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,14.05,0,0,0,0,0
-deploy_prod,4,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,153.8,0,0,0,0,0
-deploy_prod_approved,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,636.27,0,0,0,0,0
-deploy_prod_approved,2,Attribute-based,opa_set,ALLOW,ALLOW,True,10.8,0,0,0,0,0
-deploy_prod_approved,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,80.79,0,0,0,0,0
-deploy_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,579.39,0,0,0,0,0
-deploy_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,10.41,0,0,0,0,0
-deploy_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,85.72,0,0,0,0,0
-query_logs_prod,7,Obligation,rdf_owl_shacl,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,719.95,0,0,0,0,0
-query_logs_prod,7,Obligation,opa_set,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,10.29,0,0,0,0,0
-query_logs_prod,7,Obligation,opa_derived,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,77.49,0,0,0,0,0
-query_logs_sensitive_obligation,7,Obligation,rdf_owl_shacl,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,606.45,0,0,0,0,0
-query_logs_sensitive_obligation,7,Obligation,opa_set,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,11.97,0,0,0,0,0
-query_logs_sensitive_obligation,7,Obligation,opa_derived,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,109.23,0,0,0,0,0
-query_logs_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,649.9,0,0,0,0,0
-query_logs_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,11.86,0,0,0,0,0
-query_logs_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,75.66,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,rdf_owl_shacl,ALLOW,ALLOW,True,589.19,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,opa_set,ALLOW,ALLOW,True,10.08,0,0,0,0,0
-query_logs_staging_no_audit,7,Obligation,opa_derived,ALLOW,ALLOW,True,88.46,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,rdf_owl_shacl,ALLOW,ALLOW,True,601.61,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,opa_set,ALLOW,ALLOW,True,10.32,0,0,0,0,0
-query_logs_with_audit_allowed,7,Obligation,opa_derived,ALLOW,ALLOW,True,80.92,0,0,0,0,0
-read_public_allowed,1,Flat access,rdf_owl_shacl,ALLOW,ALLOW,True,576.5,0,0,0,0,0
-read_public_allowed,1,Flat access,opa_set,ALLOW,ALLOW,True,18.65,0,0,0,0,0
-read_public_allowed,1,Flat access,opa_derived,ALLOW,ALLOW,True,107.3,0,0,0,0,0
-restart_active_incident,5,State-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,636.37,0,0,0,0,0
-restart_active_incident,5,State-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.06,0,0,0,0,0
-restart_active_incident,5,State-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,73.76,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,608.95,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,opa_set,ALLOW,ALLOW,True,11.1,0,0,0,0,0
-restart_allowed,4,Relationship-dependent,opa_derived,ALLOW,ALLOW,True,88.46,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,578.38,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.68,0,0,0,0,0
-restart_break_glass_allowed,6,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,79.2,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,614.33,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,14.47,0,0,0,0,0
-restart_break_glass_expired,6,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,77.26,0,0,0,0,0
-restart_customer_facing,4,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,609.59,0,0,0,0,0
-restart_customer_facing,4,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,15.58,0,0,0,0,0
-restart_customer_facing,4,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,89.54,0,0,0,0,0
-restart_denied,4,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,582.39,0,0,0,0,0
-restart_denied,4,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,17.46,0,0,0,0,0
-restart_denied,4,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,76.98,0,0,0,0,0
-restart_dev_allowed,1,Flat access,rdf_owl_shacl,ALLOW,ALLOW,True,579.13,0,0,0,0,0
-restart_dev_allowed,1,Flat access,opa_set,ALLOW,ALLOW,True,14.97,0,0,0,0,0
-restart_dev_allowed,1,Flat access,opa_derived,ALLOW,ALLOW,True,93.35,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,591.84,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,opa_set,ALLOW,ALLOW,True,16.99,0,0,0,0,0
-restart_in_maintenance_allowed,5,State-dependent,opa_derived,ALLOW,ALLOW,True,80.78,0,0,0,0,0
-restart_new_prod_server,4,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,582.79,0,0,0,0,0
-restart_new_prod_server,4,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.42,0,0,0,0,0
-restart_new_prod_server,4,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,80.42,0,0,0,0,0
-restart_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,593.36,0,0,0,0,0
-restart_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,14.18,0,0,0,0,0
-restart_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,76.1,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,590.13,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,11.34,0,0,0,0,0
-skill_admin_tool_review,9,Adversarial skill proposer,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,78.02,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,582.98,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,opa_set,DENY,DENY,True,10.23,0,0,0,0,0
-skill_credential_harvester_denied,9,Adversarial skill proposer,opa_derived,DENY,DENY,True,85.54,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,637.23,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.09,0,0,0,0,0
-skill_finance_write_bundled_review,8,Skill composition/provenance,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,81.99,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,590.1,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,opa_set,DENY,DENY,True,13.28,0,0,0,0,0
-skill_hidden_exfil_denied,9,Adversarial skill proposer,opa_derived,DENY,DENY,True,77.34,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,rdf_owl_shacl,DENY,DENY,True,600.54,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,opa_set,DENY,DENY,True,11.81,0,0,0,0,0
-skill_postload_denied,8,Skill composition/provenance,opa_derived,DENY,DENY,True,87.21,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,579.49,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.52,0,0,0,0,0
-skill_preload_review,8,Skill composition/provenance,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,76.7,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,614.87,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,opa_set,DENY,DENY,True,11.49,0,0,0,0,0
-skill_prompt_injector_denied,9,Adversarial skill proposer,opa_derived,DENY,DENY,True,90.81,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,rdf_owl_shacl,ALLOW,ALLOW,True,618.9,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,opa_set,ALLOW,ALLOW,True,11.67,0,0,0,0,0
-skill_safe_read_allowed,8,Skill composition/provenance,opa_derived,ALLOW,ALLOW,True,98.55,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,rdf_owl_shacl,ALLOW,ALLOW,True,582.36,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,opa_set,ALLOW,ALLOW,True,12.5,0,0,0,0,0
-skill_unknown_provenance_review,8,Skill composition/provenance,opa_derived,ALLOW,ALLOW,True,98.67,0,0,0,0,0
+deploy_break_glass_allowed,5,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,1632.33,0,0,0,0,0
+deploy_break_glass_allowed,5,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,39.0,0,0,0,0,0
+deploy_break_glass_allowed,5,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,85.23,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,569.19,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.85,0,0,0,0,0
+deploy_during_freeze_denied,4,State-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,79.34,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,564.96,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,14.42,0,0,0,0,0
+deploy_no_exception_denied,5,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,95.78,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,614.96,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,opa_set,ALLOW,ALLOW,True,11.14,0,0,0,0,0
+deploy_no_freeze_allowed,4,State-dependent,opa_derived,ALLOW,ALLOW,True,92.47,0,0,0,0,0
+deploy_prod,3,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,604.53,0,0,0,0,0
+deploy_prod,3,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,11.89,0,0,0,0,0
+deploy_prod,3,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,83.63,0,0,0,0,0
+deploy_prod_approved,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,614.45,0,0,0,0,0
+deploy_prod_approved,2,Attribute-based,opa_set,ALLOW,ALLOW,True,11.68,0,0,0,0,0
+deploy_prod_approved,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,72.22,0,0,0,0,0
+deploy_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,609.83,0,0,0,0,0
+deploy_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,11.84,0,0,0,0,0
+deploy_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,92.93,0,0,0,0,0
+query_logs_prod,6,Obligation,rdf_owl_shacl,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,660.4,0,0,0,0,0
+query_logs_prod,6,Obligation,opa_set,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,16.23,0,0,0,0,0
+query_logs_prod,6,Obligation,opa_derived,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,97.44,0,0,0,0,0
+query_logs_sensitive_obligation,6,Obligation,rdf_owl_shacl,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,606.11,0,0,0,0,0
+query_logs_sensitive_obligation,6,Obligation,opa_set,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,18.39,0,0,0,0,0
+query_logs_sensitive_obligation,6,Obligation,opa_derived,ALLOW_WITH_OBLIGATION,ALLOW_WITH_OBLIGATION,True,97.7,0,0,0,0,0
+query_logs_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,689.09,0,0,0,0,0
+query_logs_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,16.39,0,0,0,0,0
+query_logs_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,93.17,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,rdf_owl_shacl,ALLOW,ALLOW,True,567.89,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,opa_set,ALLOW,ALLOW,True,11.96,0,0,0,0,0
+query_logs_staging_no_audit,6,Obligation,opa_derived,ALLOW,ALLOW,True,91.59,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,rdf_owl_shacl,ALLOW,ALLOW,True,585.28,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,opa_set,ALLOW,ALLOW,True,12.72,0,0,0,0,0
+query_logs_with_audit_allowed,6,Obligation,opa_derived,ALLOW,ALLOW,True,85.45,0,0,0,0,0
+read_public_allowed,1,Flat access,rdf_owl_shacl,ALLOW,ALLOW,True,541.27,0,0,0,0,0
+read_public_allowed,1,Flat access,opa_set,ALLOW,ALLOW,True,10.83,0,0,0,0,0
+read_public_allowed,1,Flat access,opa_derived,ALLOW,ALLOW,True,86.77,0,0,0,0,0
+restart_active_incident,4,State-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,635.22,0,0,0,0,0
+restart_active_incident,4,State-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.54,0,0,0,0,0
+restart_active_incident,4,State-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,75.27,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,594.68,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,opa_set,ALLOW,ALLOW,True,11.14,0,0,0,0,0
+restart_allowed,3,Relationship-dependent,opa_derived,ALLOW,ALLOW,True,79.12,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,580.15,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,11.97,0,0,0,0,0
+restart_break_glass_allowed,5,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,77.89,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,603.24,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.06,0,0,0,0,0
+restart_break_glass_expired,5,Exception/break-glass,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,81.56,0,0,0,0,0
+restart_customer_facing,3,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,586.94,0,0,0,0,0
+restart_customer_facing,3,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,10.86,0,0,0,0,0
+restart_customer_facing,3,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,77.93,0,0,0,0,0
+restart_denied,3,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,585.77,0,0,0,0,0
+restart_denied,3,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,11.84,0,0,0,0,0
+restart_denied,3,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,75.32,0,0,0,0,0
+restart_dev_allowed,1,Flat access,rdf_owl_shacl,ALLOW,ALLOW,True,583.53,0,0,0,0,0
+restart_dev_allowed,1,Flat access,opa_set,ALLOW,ALLOW,True,9.56,0,0,0,0,0
+restart_dev_allowed,1,Flat access,opa_derived,ALLOW,ALLOW,True,82.71,0,0,0,0,0
+restart_in_maintenance_allowed,4,State-dependent,rdf_owl_shacl,ALLOW,ALLOW,True,568.98,0,0,0,0,0
+restart_in_maintenance_allowed,4,State-dependent,opa_set,ALLOW,ALLOW,True,10.86,0,0,0,0,0
+restart_in_maintenance_allowed,4,State-dependent,opa_derived,ALLOW,ALLOW,True,74.88,0,0,0,0,0
+restart_new_prod_server,3,Relationship-dependent,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,565.33,0,0,0,0,0
+restart_new_prod_server,3,Relationship-dependent,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.49,0,0,0,0,0
+restart_new_prod_server,3,Relationship-dependent,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,74.32,0,0,0,0,0
+restart_staging_allowed,2,Attribute-based,rdf_owl_shacl,ALLOW,ALLOW,True,570.92,0,0,0,0,0
+restart_staging_allowed,2,Attribute-based,opa_set,ALLOW,ALLOW,True,9.32,0,0,0,0,0
+restart_staging_allowed,2,Attribute-based,opa_derived,ALLOW,ALLOW,True,87.57,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,573.82,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.35,0,0,0,0,0
+skill_admin_tool_review,8,Adversarial skill proposer,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,71.43,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,578.23,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,opa_set,DENY,DENY,True,11.21,0,0,0,0,0
+skill_credential_harvester_denied,8,Adversarial skill proposer,opa_derived,DENY,DENY,True,86.93,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,618.41,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,11.33,0,0,0,0,0
+skill_finance_write_bundled_review,7,Skill composition/provenance,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,79.67,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,565.01,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,opa_set,DENY,DENY,True,14.47,0,0,0,0,0
+skill_hidden_exfil_denied,8,Adversarial skill proposer,opa_derived,DENY,DENY,True,80.01,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,rdf_owl_shacl,DENY,DENY,True,606.03,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,opa_set,DENY,DENY,True,16.34,0,0,0,0,0
+skill_postload_denied,7,Skill composition/provenance,opa_derived,DENY,DENY,True,88.83,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,rdf_owl_shacl,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,564.35,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,opa_set,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,12.47,0,0,0,0,0
+skill_preload_review,7,Skill composition/provenance,opa_derived,REQUIRE_APPROVAL,REQUIRE_APPROVAL,True,89.05,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,rdf_owl_shacl,DENY,DENY,True,569.76,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,opa_set,DENY,DENY,True,12.16,0,0,0,0,0
+skill_prompt_injector_denied,8,Adversarial skill proposer,opa_derived,DENY,DENY,True,85.46,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,rdf_owl_shacl,ALLOW,ALLOW,True,591.54,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,opa_set,ALLOW,ALLOW,True,13.61,0,0,0,0,0
+skill_safe_read_allowed,7,Skill composition/provenance,opa_derived,ALLOW,ALLOW,True,90.66,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,rdf_owl_shacl,ALLOW,ALLOW,True,585.12,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,opa_set,ALLOW,ALLOW,True,12.55,0,0,0,0,0
+skill_unknown_provenance_review,7,Skill composition/provenance,opa_derived,ALLOW,ALLOW,True,107.92,0,0,0,0,0

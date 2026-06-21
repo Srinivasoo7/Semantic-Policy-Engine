@@ -1,16 +1,26 @@
-# OPA-derived Policy Baseline
+Metadata-Version: 2.1
+Name: opa-set-baseline
+Version: 0.1.0
+Summary: OPA/Rego baseline for comparing manual vs. OWL-inferred semantic policy encoding
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: regopy==1.4.0
+Provides-Extra: dev
+Requires-Dist: pytest==8.3.5; extra == "dev"
 
-Companion project to [`semantic-mvp`](../semantic-mvp/).
-Runs the validation scenarios using [OPA](https://www.openpolicyagent.org/)
+# OPA/Rego Policy Baseline
+
+Companion project to [`semantic-agent-policy-mvp`](../semantic-agent-policy-mvp/).
+Runs the **same five agent-action scenarios** using [OPA](https://www.openpolicyagent.org/)
 Rego policies (evaluated in-process via [regopy](https://pypi.org/project/regopy/)),
-so you can compare the approaches side-by-side.
+so you can compare the two approaches side-by-side.
 
 ---
 
 ## Quick start
 
 ```bash
-cd opa-derived-baseline
+cd opa-policy-baseline
 
 python -m venv .venv
 # Windows: .venv\Scripts\activate
@@ -43,14 +53,14 @@ Decision : DENY
 
 ## The core comparison
 
-| Concept | Semantic baseline (RDF/OWL/SHACL) | OPA-derived Baseline (OPA/Rego) |
+| Concept | Semantic baseline (RDF/OWL/SHACL) | This baseline (OPA/Rego) |
 |---|---|---|
-| Production-ness | Encoded **once** as ontology equivalentClass rule; OWL **infers** `srv_123 a ProductionServer` from `belongsToEnvironment :production` | Dynamically evaluated at runtime via `is_production_server(srv)` Rego rules over `data.enterprise` JSON |
-| Staging-ness | OWL infers `srv_456 a StagingServer` | Dynamically evaluated via `is_staging_server(srv)` rule |
-| Unverified skill | OWL infers `a UnverifiedSkill` from `hasVerificationStatus :Unverified` | Dynamically evaluated via `is_unverified_finance_skill(skill)` rule |
-| Finance-write check | SHACL queries `?tool :requiresPermission :FinanceWriteAccess` separately | Dynamically evaluated via properties in JSON database |
-| Adding a new prod server | Add one triple: `:srv_999 :belongsToEnvironment :production` | Add server and its metadata to `enterprise.json` |
-| Reusability | OWL class hierarchy is globally reusable across shapes | Custom predicates are defined globally in Rego helper package |
+| Production-ness | Encoded **once** as ontology equivalentClass rule; OWL **infers** `srv_123 a ProductionServer` from `belongsToEnvironment :production` | **Manually** listed in `production_servers := {"srv_123"}` |
+| Staging-ness | OWL infers `srv_456 a StagingServer` | Manually listed in `staging_servers` |
+| Unverified skill | OWL infers `a UnverifiedSkill` from `hasVerificationStatus :Unverified` | Manually listed in `unverified_finance_skills` |
+| Finance-write check | SHACL queries `?tool :requiresPermission :FinanceWriteAccess` separately | Collapsed into same hand-maintained set |
+| Adding a new prod server | Add one triple: `:srv_999 :belongsToEnvironment :production` | Add to `production_servers` set **and** any other affected sets |
+| Reusability | OWL class hierarchy is globally reusable across shapes | Rego sets must be re-enumerated per policy package |
 
 ### Why this matters
 
@@ -70,16 +80,15 @@ In the semantic baseline, production-ness is an **ontological property**:
 OWL inference **materialises** `:srv_123 a :ProductionServer` at runtime.
 The SHACL shape then simply asks `?server a :ProductionServer` — no hardcoded IDs anywhere.
 
-In this OPA-derived baseline, the same rules are dynamically derived from input enterprise JSON data rather than hardcoded sets:
+In this Rego baseline the same fact is encoded manually:
 
 ```rego
-# policies/agent_policy.rego — dynamic classification rule
-is_production_server(srv) if data.enterprise.servers[srv].environment == "production"
-is_production_server(srv) if data.enterprise.servers[srv].criticality == "customer_facing"
-is_production_server(srv) if "pci-dss" in data.enterprise.servers[srv].tags
+# policies/agent_policy.rego — manual list, must be kept in sync
+production_servers := {"srv_123"}
 ```
 
-This avoids manual set enumeration, but still encodes the schema translation rules directly in policy code rather than a centralized ontology layer.
+The Rego rule works correctly, but any new production server must be added
+to this set by a human.  The ontology approach propagates automatically.
 
 ---
 

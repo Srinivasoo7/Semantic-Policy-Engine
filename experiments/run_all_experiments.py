@@ -92,8 +92,9 @@ def _evaluate_system(
             del sys.modules[key]
             
     src = system_root / "src"
-    if str(src) not in sys.path:
-        sys.path.insert(0, str(src))
+    if str(src) in sys.path:
+        sys.path.remove(str(src))
+    sys.path.insert(0, str(src))
 
     t0 = time.perf_counter()
     try:

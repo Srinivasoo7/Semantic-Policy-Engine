@@ -1,6 +1,6 @@
 {
   "scenario_id": "skill_postload_denied",
-  "tier": 8,
+  "tier": 7,
   "tier_name": "Skill composition/provenance",
   "action_type": "SkillInvocation",
   "requested_by": "user_123",
@@ -8,8 +8,28 @@
   "targets": "malicious_skill",
   "expected_decision": "DENY",
   "description": "Post-load invocation of a skill containing a credential exfiltration instruction.",
-  "maintainability_rdf_owl_shacl": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "maintainability_opa_set": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "maintainability_opa_derived": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "reconstructable_rdf_owl_shacl": 1, "reconstructable_opa_set": 0, "reconstructable_opa_derived": 1
+  "maintainability_rdf_owl_shacl": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_set": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_derived": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "reconstructable_rdf_owl_shacl": 1,
+  "reconstructable_opa_set": 0,
+  "reconstructable_opa_derived": 1
 }

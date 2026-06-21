@@ -1,5 +1,5 @@
 [project]
-name = "opa-policy-baseline"
+name = "opa-derived-baseline"
 version = "0.1.0"
 description = "OPA/Rego baseline for comparing manual vs. OWL-inferred semantic policy encoding"
 readme = "README.md"

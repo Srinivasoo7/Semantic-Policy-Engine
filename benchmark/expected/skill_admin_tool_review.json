@@ -1,6 +1,6 @@
 {
   "scenario_id": "skill_admin_tool_review",
-  "tier": 9,
+  "tier": 8,
   "tier_name": "Adversarial skill proposer",
   "action_type": "SkillInvocation",
   "requested_by": "user_123",

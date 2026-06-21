@@ -1,6 +1,6 @@
 {
   "scenario_id": "deploy_during_freeze_denied",
-  "tier": 5,
+  "tier": 4,
   "tier_name": "State-dependent",
   "action_type": "DeployAction",
   "requested_by": "user_123",

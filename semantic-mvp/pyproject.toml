@@ -1,5 +1,5 @@
 [project]
-name = "semantic-agent-policy-mvp"
+name = "semantic-mvp"
 version = "0.1.0"
 description = "Local MVP for RDF/OWL/SHACL semantic policy validation of AI agent actions"
 readme = "README.md"

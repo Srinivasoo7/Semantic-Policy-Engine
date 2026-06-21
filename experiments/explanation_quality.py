@@ -43,8 +43,9 @@ def _get_explanation(system_name: str, system_root: Path, scenario_id: str) -> d
             del sys.modules[key]
             
     src = system_root / "src"
-    if str(src) not in sys.path:
-        sys.path.insert(0, str(src))
+    if str(src) in sys.path:
+        sys.path.remove(str(src))
+    sys.path.insert(0, str(src))
     try:
         if system_name == "rdf_owl_shacl":
             from semantic_policy.engine import run_policy_check

@@ -53,8 +53,9 @@ def benchmark(iterations: int = 100) -> list[dict]:
                 if key.startswith("opa_policy") or key.startswith("semantic_policy"):
                     del sys.modules[key]
             src = system_root / "src"
-            if str(src) not in sys.path:
-                sys.path.insert(0, str(src))
+            if str(src) in sys.path:
+                sys.path.remove(str(src))
+            sys.path.insert(0, str(src))
                 
             times = []
             try:

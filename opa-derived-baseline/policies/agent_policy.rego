@@ -20,10 +20,9 @@
 #   OWL INFERS at runtime: :srv_123 a :ProductionServer
 #   SHACL queries:         ?server a :ProductionServer
 #
-# Here in Rego we MANUALLY enumerate every production server.
-# No inference bridges "has environment=production" to
-# "is a ProductionServer". Every new server joining production
-# must be added to the set below by a human.
+# Here in Rego we dynamically evaluate production-ness based on
+# enterprise data (environment, tags, criticality) using helper rules:
+#   is_production_server(srv)
 # ─────────────────────────────────────────────────────────────
 package agent_policy
 
@@ -83,7 +82,7 @@ _deny if {
 #
 # Semantic baseline: RestartProductionServerShape queries
 #   ?server a :ProductionServer     ← OWL-inferred class
-# Rego:              we test membership in production_servers (manual).
+# Rego:              we test using is_production_server(targets).
 _require_approval if {
     input.action_type == "RestartServerAction"
     is_production_server(input.targets)
@@ -97,7 +96,7 @@ _require_approval if {
 # Semantic baseline: UnverifiedFinanceSkillPreloadShape queries
 #   ?skill a :UnverifiedSkill       ← OWL-inferred class
 #   ?tool :requiresPermission :FinanceWriteAccess
-# Rego:              we check membership in unverified_finance_skills (manual).
+# Rego:              we check using is_unverified_finance_skill(targets).
 _require_approval if {
     input.action_type == "SkillInvocation"
     input.disclosure_state == "advertised"
