@@ -1,10 +1,12 @@
 {
+  "scenario_id": "deploy_prod",
+  "tier": 3,
+  "tier_name": "Relationship-dependent",
   "action_type": "DeployAction",
   "requested_by": "user_123",
   "performed_by": "agent_01",
   "targets": "srv_777",
-  "linked_to_ticket": "none",
-  "reason": "deploying to a pci-dss server",
+  "reason": "deploy_prod",
   "change_tickets": [],
   "exceptions": [],
   "instructions": []

@@ -2,33 +2,32 @@
   "scenario_id": "restart_new_prod_server",
   "tier": 3,
   "tier_name": "Relationship-dependent",
-  "action_type": "RestartServerAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_999",
+  "suite": "core",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Experiment 1: Restart of a newly added production server (srv_999). Tests entity addition without policy edit.",
-  "experiment": "E1",
+  "causal_features": [
+    "production_server_via_environment",
+    "no_approved_ticket"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,
     "m3_data_edits": 1,
     "m4_classification_code_edits": 0,
-    "m5_dependent_policies_affected": 1
+    "m5_dependent_policies_affected": 3
   },
   "maintainability_opa_set": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,
     "m3_data_edits": 1,
     "m4_classification_code_edits": 1,
-    "m5_dependent_policies_affected": 1
+    "m5_dependent_policies_affected": 3
   },
   "maintainability_opa_derived": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,
     "m3_data_edits": 1,
     "m4_classification_code_edits": 0,
-    "m5_dependent_policies_affected": 1
+    "m5_dependent_policies_affected": 3
   },
   "reconstructable_rdf_owl_shacl": 1,
   "reconstructable_opa_set": 0,

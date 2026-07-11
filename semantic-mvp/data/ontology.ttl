@@ -1,32 +1,43 @@
 @prefix : <http://example.org/agent-policy#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 #################################################################
-# Classes
+# Action classes
 #################################################################
 
 :AgentAction a owl:Class .
 :ToolInvocation a owl:Class ; rdfs:subClassOf :AgentAction .
 :SkillInvocation a owl:Class ; rdfs:subClassOf :AgentAction .
-
 :RestartServerAction a owl:Class ; rdfs:subClassOf :ToolInvocation .
+:DeployAction a owl:Class ; rdfs:subClassOf :ToolInvocation .
+:QueryLogsAction a owl:Class ; rdfs:subClassOf :ToolInvocation .
+:ReadAction a owl:Class ; rdfs:subClassOf :ToolInvocation .
 :DisruptiveAction a owl:Class .
+:RestartServerAction rdfs:subClassOf :DisruptiveAction .
+
+#################################################################
+# Domain entity classes
+#################################################################
 
 :Server a owl:Class .
 :ProductionServer a owl:Class .
 :StagingServer a owl:Class .
 :CriticalInfrastructureAsset a owl:Class .
-
 :Service a owl:Class .
 :PaymentService a owl:Class ; rdfs:subClassOf :Service .
 :CustomerFacingService a owl:Class .
+:DataAsset a owl:Class .
 
 :Incident a owl:Class .
 :ChangeTicket a owl:Class .
 :Exception a owl:Class .
-:ActiveBreakGlassException a owl:Class ; rdfs:subClassOf :Exception .
+:BreakGlassException a owl:Class ; rdfs:subClassOf :Exception .
+:ActiveBreakGlassException a owl:Class ; rdfs:subClassOf :BreakGlassException .
+:MaintenanceWindow a owl:Class .
+:DeploymentFreeze a owl:Class .
 
 :User a owl:Class .
 :Agent a owl:Class .
@@ -36,7 +47,9 @@
 :PaymentTool a owl:Class ; rdfs:subClassOf :Tool .
 :RiskySkill a owl:Class .
 :UnverifiedSkill a owl:Class .
+:UnknownProvenanceSkill a owl:Class .
 :CredentialExfiltrationInstruction a owl:Class .
+:PromptInjectionInstruction a owl:Class .
 :MaliciousSkillInstruction a owl:Class .
 
 #################################################################
@@ -45,11 +58,25 @@
 
 :production a owl:NamedIndividual .
 :staging a owl:NamedIndividual .
+:development a owl:NamedIndividual .
+:customer_facing a owl:NamedIndividual .
+:internal a owl:NamedIndividual .
+:public a owl:NamedIndividual .
+:restricted a owl:NamedIndividual .
 :Approved a owl:NamedIndividual .
+:Pending a owl:NamedIndividual .
 :Unverified a owl:NamedIndividual .
 :Verified a owl:NamedIndividual .
+:Unknown a owl:NamedIndividual .
 :advertised a owl:NamedIndividual .
 :loaded a owl:NamedIndividual .
+:active a owl:NamedIndividual .
+:expired a owl:NamedIndividual .
+:open a owl:NamedIndividual .
+:SEV1 a owl:NamedIndividual .
+:SEV3 a owl:NamedIndividual .
+:sensitive a owl:NamedIndividual .
+:confidential a owl:NamedIndividual .
 :FinanceWriteAccess a owl:NamedIndividual .
 :AdminSecretAccess a owl:NamedIndividual .
 
@@ -67,6 +94,8 @@
 :hosts a owl:ObjectProperty .
 :belongsToEnvironment a owl:ObjectProperty .
 :affectsService a owl:ObjectProperty .
+:affectsEnvironment a owl:ObjectProperty .
+:appliesToServer a owl:ObjectProperty .
 :hasSeverity a owl:ObjectProperty .
 :hasCriticality a owl:ObjectProperty .
 :declaresTool a owl:ObjectProperty .
@@ -74,12 +103,24 @@
 :hasDisclosureState a owl:ObjectProperty .
 :hasInstruction a owl:ObjectProperty .
 :hasVerificationStatus a owl:ObjectProperty .
+:hasActiveIncident a owl:ObjectProperty .
+:hasDeploymentFreeze a owl:ObjectProperty .
+:hasMaintenanceWindow a owl:ObjectProperty .
+:windowStatus a owl:ObjectProperty .
+:freezeStatus a owl:ObjectProperty .
+:exceptionStatus a owl:ObjectProperty .
+:incidentStatus a owl:ObjectProperty .
+:hasAccessLevel a owl:ObjectProperty .
+:hasClassification a owl:ObjectProperty .
+:grantedTo a owl:ObjectProperty .
 :hasReason a owl:DatatypeProperty .
 :hasTag a owl:DatatypeProperty .
 :hasAuditObligation a owl:DatatypeProperty .
+:expiresAt a owl:DatatypeProperty .
 
 #################################################################
-# OWL equivalence / inference rules
+# Frozen ProductionServer definition (must match OPA-derived)
+# Server ∧ (env=production ∨ criticality=customer_facing ∨ tag=pci-dss)
 #################################################################
 
 :ProductionServer owl:equivalentClass [
@@ -94,9 +135,6 @@
               [ a owl:Restriction ;
                 owl:onProperty :hasCriticality ;
                 owl:hasValue :customer_facing ]
-              [ a owl:Restriction ;
-                owl:onProperty :hasTag ;
-                owl:hasValue "prod-like" ]
               [ a owl:Restriction ;
                 owl:onProperty :hasTag ;
                 owl:hasValue "pci-dss" ]
@@ -117,7 +155,6 @@
 
 :ProductionServer rdfs:subClassOf :CriticalInfrastructureAsset .
 :PaymentService rdfs:subClassOf :CustomerFacingService .
-:RestartServerAction rdfs:subClassOf :DisruptiveAction .
 
 :UnverifiedSkill owl:equivalentClass [
     a owl:Class ;
@@ -126,6 +163,16 @@
         [ a owl:Restriction ;
           owl:onProperty :hasVerificationStatus ;
           owl:hasValue :Unverified ]
+    )
+] .
+
+:UnknownProvenanceSkill owl:equivalentClass [
+    a owl:Class ;
+    owl:intersectionOf (
+        :Skill
+        [ a owl:Restriction ;
+          owl:onProperty :hasVerificationStatus ;
+          owl:hasValue :Unknown ]
     )
 ] .
 

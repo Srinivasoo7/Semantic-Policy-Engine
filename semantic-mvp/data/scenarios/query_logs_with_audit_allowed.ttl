@@ -1,6 +1,6 @@
 @prefix : <http://example.org/agent-policy#> .
-:action_query_logs_with_audit a :QueryLogsAction ;
+:action_query_logs_audit a :QueryLogsAction ;
     :requestedBy :user_123 ; :performedBy :agent_01 ;
-    :targets :srv_777 ;
+    :targets :srv_123 ;
     :hasAuditObligation "true" ;
-    :hasReason "query logs with audit obligation satisfied" .
+    :hasReason "query production logs with audit obligation" .

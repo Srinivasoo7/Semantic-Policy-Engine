@@ -2,5 +2,6 @@
 :action_deploy_prod_approved a :DeployAction ;
     :requestedBy :user_123 ; :performedBy :agent_01 ;
     :targets :srv_123 ;
+    :hasChangeTicket :CHG_APPROVED ;
     :linkedToTicket :CHG_APPROVED ;
     :hasReason "deploy with approved ticket" .

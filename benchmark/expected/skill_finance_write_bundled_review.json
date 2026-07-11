@@ -2,12 +2,13 @@
   "scenario_id": "skill_finance_write_bundled_review",
   "tier": 7,
   "tier_name": "Skill composition/provenance",
-  "action_type": "SkillInvocation",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "expense_reconciler",
+  "suite": "core",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Benchmark scenario for skill_finance_write_bundled_review",
+  "causal_features": [
+    "unverified_skill",
+    "bundled_finance_write_tool",
+    "advertised_disclosure"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

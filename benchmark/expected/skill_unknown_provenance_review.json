@@ -2,12 +2,13 @@
   "scenario_id": "skill_unknown_provenance_review",
   "tier": 7,
   "tier_name": "Skill composition/provenance",
-  "action_type": "SkillInvocation",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "unknown_provenance_skill",
-  "expected_decision": "ALLOW",
-  "description": "Benchmark scenario for skill_unknown_provenance_review",
+  "suite": "extension",
+  "expected_decision": "REQUIRE_APPROVAL",
+  "causal_features": [
+    "unknown_provenance_skill",
+    "privileged_finance_tool",
+    "advertised_disclosure"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

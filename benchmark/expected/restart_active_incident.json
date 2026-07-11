@@ -2,12 +2,13 @@
   "scenario_id": "restart_active_incident",
   "tier": 4,
   "tier_name": "State-dependent",
-  "action_type": "RestartServerAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_123",
+  "suite": "extension",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Benchmark scenario for restart_active_incident",
+  "causal_features": [
+    "production_server",
+    "open_sev1_incident",
+    "ticket_insufficient_without_break_glass"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

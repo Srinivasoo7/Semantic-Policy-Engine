@@ -1,10 +1,12 @@
 {
+  "scenario_id": "restart_new_prod_server",
+  "tier": 3,
+  "tier_name": "Relationship-dependent",
   "action_type": "RestartServerAction",
   "requested_by": "user_123",
   "performed_by": "agent_01",
   "targets": "srv_999",
-  "linked_to_ticket": "INC_456",
-  "reason": "new production server restart test",
+  "reason": "restart_new_prod_server",
   "change_tickets": [],
   "exceptions": [],
   "instructions": []

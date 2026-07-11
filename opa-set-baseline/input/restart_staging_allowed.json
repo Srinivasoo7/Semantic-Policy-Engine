@@ -1,10 +1,12 @@
 {
+  "scenario_id": "restart_staging_allowed",
+  "tier": 2,
+  "tier_name": "Attribute-based",
   "action_type": "RestartServerAction",
   "requested_by": "user_123",
   "performed_by": "agent_01",
   "targets": "srv_456",
-  "linked_to_ticket": "INC_789",
-  "reason": "staging service restart for testing",
+  "reason": "restart_staging_allowed",
   "change_tickets": [],
   "exceptions": [],
   "instructions": []

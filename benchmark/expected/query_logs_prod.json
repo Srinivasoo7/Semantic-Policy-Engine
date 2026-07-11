@@ -2,32 +2,31 @@
   "scenario_id": "query_logs_prod",
   "tier": 6,
   "tier_name": "Obligation",
-  "action_type": "QueryLogsAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_777",
+  "suite": "core",
   "expected_decision": "ALLOW_WITH_OBLIGATION",
-  "description": "Experiment 3, Policy 3: Query logs from a pci-dss server without satisfying the audit obligation. Tests obligation policy tier.",
-  "experiment": "E3",
+  "causal_features": [
+    "production_server",
+    "no_audit_obligation"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
-    "m2_semantic_edits": 1,
-    "m3_data_edits": 1,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
     "m4_classification_code_edits": 0,
     "m5_dependent_policies_affected": 3
   },
   "maintainability_opa_set": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,
-    "m3_data_edits": 1,
-    "m4_classification_code_edits": 1,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
     "m5_dependent_policies_affected": 3
   },
   "maintainability_opa_derived": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,
-    "m3_data_edits": 1,
-    "m4_classification_code_edits": 1,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
     "m5_dependent_policies_affected": 3
   },
   "reconstructable_rdf_owl_shacl": 1,

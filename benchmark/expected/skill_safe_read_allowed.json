@@ -2,12 +2,12 @@
   "scenario_id": "skill_safe_read_allowed",
   "tier": 7,
   "tier_name": "Skill composition/provenance",
-  "action_type": "SkillInvocation",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "safe_read_skill",
+  "suite": "core",
   "expected_decision": "ALLOW",
-  "description": "Benchmark scenario for skill_safe_read_allowed",
+  "causal_features": [
+    "verified_skill",
+    "no_privileged_tool_policy_match"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

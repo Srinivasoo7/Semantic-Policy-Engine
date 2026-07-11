@@ -1,53 +1,72 @@
 # Reproducibility Notes
 
-This document provides guidelines for reproducing the benchmark results and outlines historical changes to the tooling environment.
-
 ## Execution Environment
 
-All tables in the repository were generated using Python 3.8+ on the benchmark code at the recorded commit hash. 
+Regenerate all tables from a clean editable install:
+
+```bash
+pip install -e semantic-mvp/
+pip install -e opa-set-baseline/
+pip install -e opa-derived-baseline/
+
+python3 -m pytest opa-set-baseline/tests/ -q
+python3 -m pytest opa-derived-baseline/tests/ -q
+python3 -m pytest semantic-mvp/tests/ -q
+
+python3 experiments/run_all_experiments.py
+python3 experiments/maintainability.py
+python3 experiments/explanation_quality.py
+python3 experiments/latency.py --iterations 10
+python3 experiments/generate_tables.py
+```
+
+Use `python3` if `python` is not on PATH.
 
 ### Latency Measurement Strategy
-Latency benchmarks are executed via `experiments/latency.py`. For each scenario:
-1. A single warm-up evaluation of the policy engine is run to compile the rules and load initial graphs into memory.
-2. The engine is then run for `N` timed iterations (default `100`, configured to `10` or more for verification).
-3. The median and 95th percentile (p95) times are calculated and saved under `results/raw/latency.csv`.
 
-To regenerate the results tables:
-```bash
-# Run all accuracy, maintainability, and explanation metrics
-python experiments/run_all_experiments.py
-python experiments/maintainability.py
-python experiments/explanation_quality.py
+`experiments/latency.py` for each scenario:
 
-# Run the latency benchmarks (e.g. 100 iterations)
-python experiments/latency.py --iterations 100
+1. One warm-up evaluation  
+2. `N` timed iterations (default often 10 for author snapshots)  
+3. Median and p95 written to `results/raw/latency.csv`
 
-# Aggregates results into results/tables/
-python experiments/generate_tables.py
-```
+Latency is **environment-dependent** and measures a **cold-evaluation prototype** (graph load + OWL-RL + SHACL each call unless otherwise stated). Absolute milliseconds must not be mixed across machines.
 
 ## OPA Package-Name Collision Fix
 
-> [!NOTE]
-> Earlier development versions of the benchmark code used the same Python distribution name (`opa-policy-baseline`) in `pyproject.toml` for both the `opa-set-baseline` and `opa-derived-baseline` sub-packages.
->
-> The artifact now uses distinct package names, `opa-set-baseline` and `opa-derived-baseline`, to avoid editable-install contamination where one installation would silently overwrite the other. Ensure you reinstall the updated packages:
-> ```bash
-> pip install -e opa-set-baseline/
-> pip install -e opa-derived-baseline/
-> ```
+Earlier versions used the same distribution name for both OPA baselines. The artifact now uses distinct names:
 
----
+- `opa-set-baseline`
+- `opa-derived-baseline`
 
-## Results Snapshot
+Reinstall both after pull.
 
-The benchmark results in the tables were generated and verified using the following system parameters:
+## Pytest note
 
-- **Commit**: `c29a76b` (with subsequent documentation polish commits)
-- **Python Version**: `3.8.19 (AuthenticAMD, Windows 64-bit)`
-- **OS / CPU**: `Windows 11 (build 26200) / AMD64 Family 23 Model 96 Stepping 1`
-- **Latency Iterations**: `10` or `100` timed runs after `1` warm-up call
-- **Generated Outputs**:
-  - Raw Metrics: `results/raw/decision_accuracy.csv`, `results/raw/maintainability.csv`, `results/raw/explanation_quality.csv`, `results/raw/latency.csv`
-  - Rendered Markdown Tables: `results/tables/comparison_table.md`, `results/tables/tier_summary.md`
-  - LaTeX Output: `results/tables/comparison_table.tex`
+Run each baseline’s tests in a **separate** pytest invocation. The three packages historically shared a `tests` package basename; separate invocations avoid import collisions.
+
+## Suite integrity
+
+- **32 scenarios**, each with `causal_features` and `suite` (`core` | `extension`) in `benchmark/expected/`
+- Extension policies (freeze, incident, maintenance, break-glass, unknown provenance, admin-secret, prompt-injection) are implemented in **all three** systems
+- Decision algebra: `DENY ≻ REQUIRE_APPROVAL ≻ ALLOW_WITH_OBLIGATION ≻ ALLOW`
+- Maintainability is **E1–E3 only** (not per-scenario zero rows)
+- Explanation main score is **c1–c4 only** (max 4); reconstructability annotations are metadata only
+
+## Results Snapshot (post-repair)
+
+- **Decision conformance:** 96/96 (32 scenarios × 3 systems) after P0 repair  
+- **Unit tests:** 32 per system (96 total)  
+- **Generated outputs:**
+  - `results/raw/decision_accuracy.csv`
+  - `results/raw/maintainability.csv` / `maintainability_e1_e3.json`
+  - `results/raw/explanation_quality.csv`
+  - `results/raw/latency.csv`
+  - `results/tables/comparison_table.md`
+  - `results/tables/tier_summary.md`
+  - `results/tables/maintainability_e1_e3.md`
+  - `results/tables/comparison_table.tex`
+
+Record the git commit SHA and `pip freeze` in the paper’s experimental-setup section before submission.
+
+See `paper/research_claims.md` for frozen claims.

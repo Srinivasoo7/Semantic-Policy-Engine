@@ -71,28 +71,33 @@ def _get_explanation(system_name: str, system_root: Path, scenario_id: str) -> d
 
 
 def score_explanation(expl: dict, reconstructable: int = 0) -> dict:
+    """Score runtime-exported explanation *fields*.
+
+    Main score (total_score) uses only runtime-observable fields c1–c4.
+    c5_reconstructable is retained as an optional pre-registered annotation
+    and is NOT included in total_score (avoids circular scoring).
+    """
     decision = expl.get("decision", "ALLOW")
-    
-    # c3 is violated_policy. For ALLOW decisions, it is high quality (1) if it is correctly empty.
-    # For non-ALLOW decisions, it is high quality (1) if it is non-empty.
+
+    # c3: for ALLOW, empty violated_policy is correct; otherwise non-empty required.
     if decision == "ALLOW":
         has_violated_policy = 1 if not expl.get("violated_policy") else 0
     else:
         has_violated_policy = 1 if expl.get("violated_policy") else 0
 
+    c1 = 1 if expl.get("asserted_facts") else 0
+    c2 = 1 if expl.get("inferred_facts") else 0
+    c3 = has_violated_policy
+    c4 = 1 if expl.get("decision_reason") else 0
+
     return {
-        "c1_asserted_facts":   1 if expl.get("asserted_facts") else 0,
-        "c2_inferred_facts":   1 if expl.get("inferred_facts") else 0,
-        "c3_violated_policy":  has_violated_policy,
-        "c4_decision_reason":  1 if expl.get("decision_reason") else 0,
-        "c5_reconstructable":  reconstructable,
-        "total_score":         (
-            (1 if expl.get("asserted_facts") else 0) +
-            (1 if expl.get("inferred_facts") else 0) +
-            has_violated_policy +
-            (1 if expl.get("decision_reason") else 0) +
-            reconstructable
-        ),
+        "c1_asserted_facts": c1,
+        "c2_inferred_facts": c2,
+        "c3_violated_policy": c3,
+        "c4_decision_reason": c4,
+        "c5_reconstructable_annotation": reconstructable,
+        "total_score": c1 + c2 + c3 + c4,  # max 4 — runtime fields only
+        "total_score_with_annotation": c1 + c2 + c3 + c4 + reconstructable,
     }
 
 

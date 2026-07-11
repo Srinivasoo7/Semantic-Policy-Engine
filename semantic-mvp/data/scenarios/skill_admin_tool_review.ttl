@@ -1,7 +1,6 @@
 @prefix : <http://example.org/agent-policy#> .
 :action_skill_admin_tools a :SkillInvocation ;
     :requestedBy :user_123 ; :performedBy :agent_01 ;
-    :targets :expense_reconciler ;
+    :targets :admin_ops_skill ;
     :hasDisclosureState :advertised ;
-    :declaresTool :export_secrets ;
     :hasReason "skill bundles admin secret access tool" .

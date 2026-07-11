@@ -2,14 +2,33 @@
   "scenario_id": "restart_staging_allowed",
   "tier": 2,
   "tier_name": "Attribute-based",
-  "action_type": "RestartServerAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_456",
+  "suite": "core",
   "expected_decision": "ALLOW",
-  "description": "Restart of a staging server — no approval required.",
-  "maintainability_rdf_owl_shacl": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "maintainability_opa_set": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "maintainability_opa_derived": { "m1_enforcement_policy_edits": 0, "m2_semantic_edits": 0, "m3_data_edits": 0, "m4_classification_code_edits": 0, "m5_dependent_policies_affected": 0 },
-  "reconstructable_rdf_owl_shacl": 1, "reconstructable_opa_set": 0, "reconstructable_opa_derived": 1
+  "causal_features": [
+    "staging_environment"
+  ],
+  "maintainability_rdf_owl_shacl": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_set": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "maintainability_opa_derived": {
+    "m1_enforcement_policy_edits": 0,
+    "m2_semantic_edits": 0,
+    "m3_data_edits": 0,
+    "m4_classification_code_edits": 0,
+    "m5_dependent_policies_affected": 0
+  },
+  "reconstructable_rdf_owl_shacl": 1,
+  "reconstructable_opa_set": 0,
+  "reconstructable_opa_derived": 1
 }

@@ -1,8 +1,6 @@
 @prefix : <http://example.org/agent-policy#> .
-
 :action_restart_denied a :RestartServerAction ;
-    :requestedBy :user_123 ;
-    :performedBy :agent_01 ;
+    :requestedBy :user_123 ; :performedBy :agent_01 ;
     :targets :srv_123 ;
     :linkedToTicket :INC_456 ;
     :hasReason "payment service failure" .

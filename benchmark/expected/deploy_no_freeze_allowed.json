@@ -2,12 +2,12 @@
   "scenario_id": "deploy_no_freeze_allowed",
   "tier": 4,
   "tier_name": "State-dependent",
-  "action_type": "DeployAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_456",
+  "suite": "extension",
   "expected_decision": "ALLOW",
-  "description": "Benchmark scenario for deploy_no_freeze_allowed",
+  "causal_features": [
+    "staging_environment",
+    "no_active_freeze_applies"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

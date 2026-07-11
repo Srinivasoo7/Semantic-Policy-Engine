@@ -1,1 +1,13 @@
-{"scenario_id":"read_public_allowed","tier":1,"tier_name":"Flat access","action_type":"ReadAction","requested_by":"user_123","performed_by":"agent_01","targets":"public_api","reason":"read public API"}
+{
+  "scenario_id": "read_public_allowed",
+  "tier": 1,
+  "tier_name": "Flat access",
+  "action_type": "ReadAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "public_api",
+  "reason": "read_public_allowed",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": []
+}

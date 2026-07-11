@@ -14,12 +14,35 @@
     },
     "srv_777": {
       "tags": ["pci-dss"]
+    },
+    "srv_dev": {
+      "environment": "development"
     }
   },
   "skills": {
     "expense_reconciler": {
       "verification_status": "unverified",
       "permissions": ["finance_write"]
+    },
+    "safe_read_skill": {
+      "verification_status": "verified",
+      "permissions": ["finance_read"]
+    },
+    "unknown_provenance_skill": {
+      "verification_status": "unknown",
+      "permissions": ["finance_write"]
+    },
+    "admin_ops_skill": {
+      "verification_status": "verified",
+      "permissions": ["admin_secret"]
+    },
+    "credential_harvester": {
+      "verification_status": "unverified",
+      "permissions": ["admin_secret"]
+    },
+    "prompt_injector": {
+      "verification_status": "unverified",
+      "permissions": []
     }
   }
 }

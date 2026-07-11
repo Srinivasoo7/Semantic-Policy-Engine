@@ -3,5 +3,4 @@
     :requestedBy :user_123 ; :performedBy :agent_01 ;
     :targets :unknown_provenance_skill ;
     :hasDisclosureState :advertised ;
-    :declaresTool :submit_payment ;
-    :hasReason "invoke skill with unknown provenance" .
+    :hasReason "invoke skill with unknown provenance and finance tools" .

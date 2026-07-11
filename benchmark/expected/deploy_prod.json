@@ -2,13 +2,12 @@
   "scenario_id": "deploy_prod",
   "tier": 3,
   "tier_name": "Relationship-dependent",
-  "action_type": "DeployAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_777",
+  "suite": "core",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Experiment 3, Policy 2: Deploy to a pci-dss tagged server without approved change ticket. Tests multi-policy abstraction reuse.",
-  "experiment": "E3",
+  "causal_features": [
+    "production_server_via_pci_tag",
+    "no_approved_ticket"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 1,

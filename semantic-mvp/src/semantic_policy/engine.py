@@ -87,28 +87,46 @@ def _collect_violated_shapes(results_graph: Graph) -> List[str]:
     return sorted(list(set(shapes)))
 
 
+# Shared decision algebra (must match OPA Rego priority):
+# DENY ≻ REQUIRE_APPROVAL ≻ ALLOW_WITH_OBLIGATION ≻ ALLOW
+_DENY_SHAPES = {
+    "LoadedSkillCredentialExfiltrationShape",
+    "LoadedSkillPromptInjectionShape",
+    "DeployDuringFreezeShape",
+}
+_APPROVAL_SHAPES = {
+    "RestartProductionServerShape",
+    "RestartDuringIncidentShape",
+    "DeployProductionServerShape",
+    "UnverifiedFinanceSkillPreloadShape",
+    "UnknownProvenanceSkillPreloadShape",
+    "AdminSecretSkillPreloadShape",
+}
+_OBLIGATION_SHAPES = {
+    "QueryLogsProductionServerShape",
+}
+
+
 def decision_from_shapes(conforms: bool, violated_shapes: List[str]) -> str:
+    """Map violated SHACL shapes to the shared multi-outcome decision algebra.
+
+    The mapper is an explicit enforcement adapter: SHACL reports constraint
+    violations; this function applies priority-ordered governance outcomes.
+    """
     if conforms or not violated_shapes:
         return "ALLOW"
 
-    # Priority 1: DENY shapes
-    if "LoadedSkillCredentialExfiltrationShape" in violated_shapes:
+    if any(s in _DENY_SHAPES for s in violated_shapes):
         return "DENY"
 
-    # Priority 2: REQUIRE_APPROVAL shapes
-    approval_shapes = {
-        "RestartProductionServerShape",
-        "UnverifiedFinanceSkillPreloadShape",
-        "DeployProductionServerShape",
-    }
-    if any(s in approval_shapes for s in violated_shapes):
+    if any(s in _APPROVAL_SHAPES for s in violated_shapes):
         return "REQUIRE_APPROVAL"
 
-    # Priority 3: ALLOW_WITH_OBLIGATION shapes
-    if "QueryLogsProductionServerShape" in violated_shapes:
+    if any(s in _OBLIGATION_SHAPES for s in violated_shapes):
         return "ALLOW_WITH_OBLIGATION"
 
-    return "REQUIRE_CLARIFICATION"
+    # Unknown shape → fail closed to approval rather than inventing a new label
+    return "REQUIRE_APPROVAL"
 
 
 def run_policy_check(

@@ -1,1 +1,14 @@
-{"scenario_id":"skill_unknown_provenance_review","tier":8,"tier_name":"Skill composition/provenance","action_type":"SkillInvocation","requested_by":"user_123","performed_by":"agent_01","targets":"unknown_provenance_skill","disclosure_state":"advertised","reason":"invoke unknown provenance skill","change_tickets":[],"exceptions":[],"instructions":[]}
+{
+  "scenario_id": "skill_unknown_provenance_review",
+  "tier": 7,
+  "tier_name": "Skill composition/provenance",
+  "action_type": "SkillInvocation",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "unknown_provenance_skill",
+  "reason": "skill_unknown_provenance_review",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": [],
+  "disclosure_state": "advertised"
+}

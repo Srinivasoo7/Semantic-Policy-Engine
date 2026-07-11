@@ -2,5 +2,6 @@
 :action_restart_active_incident a :RestartServerAction ;
     :requestedBy :user_123 ; :performedBy :agent_01 ;
     :targets :srv_123 ;
+    :hasChangeTicket :CHG_APPROVED ;
     :hasActiveIncident :active_incident ;
-    :hasReason "restart server with active SEV1 incident" .
+    :hasReason "restart server with active SEV1 incident despite ticket" .

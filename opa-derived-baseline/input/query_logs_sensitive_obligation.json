@@ -1,1 +1,14 @@
-{"scenario_id":"query_logs_sensitive_obligation","tier":7,"tier_name":"Obligation","action_type":"QueryLogsAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_888","reason":"access sensitive logs without audit","has_audit_obligation":false,"change_tickets":[],"exceptions":[],"instructions":[]}
+{
+  "scenario_id": "query_logs_sensitive_obligation",
+  "tier": 6,
+  "tier_name": "Obligation",
+  "action_type": "QueryLogsAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_888",
+  "reason": "query_logs_sensitive_obligation",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": [],
+  "has_audit_obligation": false
+}

@@ -1,24 +1,60 @@
 @prefix : <http://example.org/agent-policy#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:RestartProductionServerShape
+#################################################################
+# DENY shapes (highest priority in decision mapper)
+#################################################################
+
+# Loaded skill with credential-exfiltration instruction
+:LoadedSkillCredentialExfiltrationShape
     a sh:NodeShape ;
-    sh:targetClass :RestartServerAction ;
-    sh:severity sh:Warning ;
+    sh:targetClass :SkillInvocation ;
+    sh:severity sh:Violation ;
     sh:sparql [
-        sh:message "Restarting a production server requires an approved change ticket or an active break-glass exception." ;
+        sh:message "Loaded skill contains credential exfiltration instruction. Invocation must be denied." ;
         sh:select """
             PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :hasDisclosureState :loaded .
+                $this :hasInstruction ?instruction .
+                ?instruction a :CredentialExfiltrationInstruction .
+            }
+        """ ;
+    ] .
 
+# Loaded skill with prompt-injection instruction
+:LoadedSkillPromptInjectionShape
+    a sh:NodeShape ;
+    sh:targetClass :SkillInvocation ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "Loaded skill contains prompt-injection instruction. Invocation must be denied." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :hasDisclosureState :loaded .
+                $this :hasInstruction ?instruction .
+                ?instruction a :PromptInjectionInstruction .
+            }
+        """ ;
+    ] .
+
+# Production deploy during an active deployment freeze (no break-glass)
+:DeployDuringFreezeShape
+    a sh:NodeShape ;
+    sh:targetClass :DeployAction ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "Deploying to a production server during an active deployment freeze is denied without break-glass." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
             SELECT $this WHERE {
                 $this :targets ?server .
                 ?server a :ProductionServer .
-
-                FILTER NOT EXISTS {
-                    $this :hasChangeTicket ?ticket .
-                    ?ticket :hasStatus :Approved .
-                }
-
+                $this :hasDeploymentFreeze ?freeze .
+                ?freeze a :DeploymentFreeze ;
+                        :freezeStatus :active .
                 FILTER NOT EXISTS {
                     $this :hasException ?exception .
                     ?exception a :ActiveBreakGlassException .
@@ -27,15 +63,102 @@
         """ ;
     ] .
 
+#################################################################
+# REQUIRE_APPROVAL shapes
+#################################################################
+
+# Restart production without approved ticket, break-glass, or maintenance window
+:RestartProductionServerShape
+    a sh:NodeShape ;
+    sh:targetClass :RestartServerAction ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Restarting a production server requires an approved change ticket, active break-glass, or an active maintenance window." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :targets ?server .
+                ?server a :ProductionServer .
+
+                FILTER NOT EXISTS {
+                    $this :hasChangeTicket ?ticket .
+                    ?ticket :hasStatus "Approved" .
+                }
+                FILTER NOT EXISTS {
+                    $this :hasException ?exception .
+                    ?exception a :ActiveBreakGlassException .
+                }
+                FILTER NOT EXISTS {
+                    $this :hasMaintenanceWindow ?window .
+                    ?window a :MaintenanceWindow ;
+                            :windowStatus :active .
+                }
+            }
+        """ ;
+    ] .
+
+# Restart production during open SEV1 incident (ticket alone is insufficient)
+:RestartDuringIncidentShape
+    a sh:NodeShape ;
+    sh:targetClass :RestartServerAction ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Restarting a production server during an open SEV1 incident requires additional approval or break-glass." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :targets ?server .
+                ?server a :ProductionServer .
+                $this :hasActiveIncident ?incident .
+                ?incident a :Incident ;
+                          :hasSeverity :SEV1 ;
+                          :incidentStatus :open .
+                FILTER NOT EXISTS {
+                    $this :hasException ?exception .
+                    ?exception a :ActiveBreakGlassException .
+                }
+            }
+        """ ;
+    ] .
+
+# Deploy production without approved ticket or break-glass
+:DeployProductionServerShape
+    a sh:NodeShape ;
+    sh:targetClass :DeployAction ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Deploying to a production server requires an approved change ticket or active break-glass." ;
+        sh:select """
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :targets ?server .
+                ?server a :ProductionServer .
+
+                FILTER NOT EXISTS {
+                    $this :hasChangeTicket ?ticket .
+                    ?ticket :hasStatus "Approved" .
+                }
+                FILTER NOT EXISTS {
+                    $this :linkedToTicket ?ticket2 .
+                    ?ticket2 :hasStatus "Approved" .
+                }
+                FILTER NOT EXISTS {
+                    $this :hasException ?exception .
+                    ?exception a :ActiveBreakGlassException .
+                }
+            }
+        """ ;
+    ] .
+
+# Preload unverified skill with finance-write tools
 :UnverifiedFinanceSkillPreloadShape
     a sh:NodeShape ;
     sh:targetClass :SkillInvocation ;
     sh:severity sh:Warning ;
     sh:sparql [
-        sh:message "Pre-load invocation of an unverified skill that declares finance-write tools requires approval or clarification." ;
+        sh:message "Pre-load invocation of an unverified skill that declares finance-write tools requires approval." ;
         sh:select """
             PREFIX : <http://example.org/agent-policy#>
-
             SELECT $this WHERE {
                 $this :targets ?skill .
                 $this :hasDisclosureState :advertised .
@@ -46,72 +169,62 @@
         """ ;
     ] .
 
-:LoadedSkillCredentialExfiltrationShape
+# Preload skill with unknown provenance and privileged tools
+:UnknownProvenanceSkillPreloadShape
     a sh:NodeShape ;
     sh:targetClass :SkillInvocation ;
-    sh:severity sh:Violation ;
+    sh:severity sh:Warning ;
     sh:sparql [
-        sh:message "Loaded skill contains credential exfiltration or malicious instruction. Invocation must be denied." ;
+        sh:message "Pre-load invocation of a skill with unknown provenance that declares privileged tools requires approval." ;
         sh:select """
             PREFIX : <http://example.org/agent-policy#>
-
             SELECT $this WHERE {
-                $this :hasDisclosureState :loaded .
-                $this :hasInstruction ?instruction .
-                ?instruction a :CredentialExfiltrationInstruction .
+                $this :targets ?skill .
+                $this :hasDisclosureState :advertised .
+                ?skill a :UnknownProvenanceSkill .
+                ?skill :declaresTool ?tool .
+                ?tool :requiresPermission ?perm .
+                FILTER(?perm IN (:FinanceWriteAccess, :AdminSecretAccess))
             }
         """ ;
     ] .
 
-# -------------------------------------------------------------------------
-# SHAPE 4: Deploying to Production
-# -------------------------------------------------------------------------
-:DeployProductionServerShape a sh:NodeShape ;
-    sh:targetClass :DeployAction ;
+# Preload skill that declares admin-secret tools
+:AdminSecretSkillPreloadShape
+    a sh:NodeShape ;
+    sh:targetClass :SkillInvocation ;
+    sh:severity sh:Warning ;
     sh:sparql [
-        a sh:SPARQLConstraint ;
-        sh:message "Deploying to a production server requires an approved change ticket." ;
-        sh:severity sh:Warning ;
-        sh:prefixes [
-            sh:declare [ sh:prefix "ex" ; sh:namespace "http://example.org/agent-policy#" ]
-        ] ;
+        sh:message "Pre-load invocation of a skill that declares admin-secret tools requires approval." ;
         sh:select """
-            SELECT $this ?server
-            WHERE {
-                $this ex:targets ?server .
-                ?server a ex:ProductionServer .
-                
-                # Fails if there is NO approved change ticket
-                FILTER NOT EXISTS {
-                    $this ex:linkedToTicket ?ticket .
-                    ?ticket ex:hasStatus "Approved" .
-                }
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :targets ?skill .
+                $this :hasDisclosureState :advertised .
+                ?skill :declaresTool ?tool .
+                ?tool :requiresPermission :AdminSecretAccess .
             }
-        """
+        """ ;
     ] .
 
-# -------------------------------------------------------------------------
-# SHAPE 5: Querying Logs from Production
-# -------------------------------------------------------------------------
-:QueryLogsProductionServerShape a sh:NodeShape ;
+#################################################################
+# ALLOW_WITH_OBLIGATION shapes
+#################################################################
+
+:QueryLogsProductionServerShape
+    a sh:NodeShape ;
     sh:targetClass :QueryLogsAction ;
+    sh:severity sh:Info ;
     sh:sparql [
-        a sh:SPARQLConstraint ;
         sh:message "Querying logs from a production server requires an audit obligation." ;
-        sh:severity sh:Info ;
-        sh:prefixes [
-            sh:declare [ sh:prefix "ex" ; sh:namespace "http://example.org/agent-policy#" ]
-        ] ;
         sh:select """
-            SELECT $this ?server
-            WHERE {
-                $this ex:targets ?server .
-                ?server a ex:ProductionServer .
-                
-                # Fails if there is NO audit obligation met
+            PREFIX : <http://example.org/agent-policy#>
+            SELECT $this WHERE {
+                $this :targets ?server .
+                ?server a :ProductionServer .
                 FILTER NOT EXISTS {
-                    $this ex:hasAuditObligation "true" .
+                    $this :hasAuditObligation "true" .
                 }
             }
-        """
+        """ ;
     ] .

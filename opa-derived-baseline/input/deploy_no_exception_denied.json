@@ -1,1 +1,13 @@
-{"scenario_id":"deploy_no_exception_denied","tier":6,"tier_name":"Exception/break-glass","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"deploy with no exception and no ticket","change_tickets":[],"exceptions":[],"instructions":[]}
+{
+  "scenario_id": "deploy_no_exception_denied",
+  "tier": 5,
+  "tier_name": "Exception/break-glass",
+  "action_type": "DeployAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_123",
+  "reason": "deploy_no_exception_denied",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": []
+}

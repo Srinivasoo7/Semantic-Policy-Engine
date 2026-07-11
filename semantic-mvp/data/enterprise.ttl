@@ -1,5 +1,12 @@
 @prefix : <http://example.org/agent-policy#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# Stable enterprise facts. Ephemeral runtime state (active freeze,
+# open incidents, maintenance windows, break-glass bindings) is
+# asserted in scenario graphs so it is causally scenario-local.
+#################################################################
 
 :user_123 a :User .
 :agent_01 a :Agent .
@@ -12,33 +19,6 @@
     :hosts :catalog_service ;
     :belongsToEnvironment :staging .
 
-:payment_service a :PaymentService ;
-    :hasCriticality :customer_facing .
-
-:catalog_service a :Service ;
-    :hasCriticality :internal .
-
-:INC_456 a :Incident ;
-    :affectsService :payment_service ;
-    :hasSeverity :SEV1 .
-
-:INC_789 a :Incident ;
-    :affectsService :catalog_service ;
-    :hasSeverity :SEV3 .
-
-:read_invoice_db a :Tool .
-
-:submit_payment a :Tool ;
-    :requiresPermission :FinanceWriteAccess .
-
-:export_secrets a :Tool ;
-    :requiresPermission :AdminSecretAccess .
-
-:expense_reconciler a :Skill, prov:Entity ;
-    :declaresTool :read_invoice_db ;
-    :declaresTool :submit_payment ;
-    :hasVerificationStatus :Unverified .
-
 :srv_999 a :Server ;
     :hosts :payment_service ;
     :belongsToEnvironment :production .
@@ -49,17 +29,88 @@
 :srv_777 a :Server ;
     :hasTag "pci-dss" .
 
-# ── Tier 1: Flat / public entities ─────────────────────────────────────────
+:srv_dev a :Server ;
+    :belongsToEnvironment :development .
+
+:payment_service a :PaymentService ;
+    :hasCriticality :customer_facing .
+
+:catalog_service a :Service ;
+    :hasCriticality :internal .
+
 :public_api a :Service ;
     :hasAccessLevel :public .
 
 :restricted_db a :Service ;
     :hasAccessLevel :restricted .
 
-:srv_dev a :Server ;
-    :belongsToEnvironment :development .
+:INC_456 a :Incident ;
+    :affectsService :payment_service ;
+    :hasSeverity :SEV1 .
 
-# ── Tier 5: State-dependent entities ───────────────────────────────────────
+:INC_789 a :Incident ;
+    :affectsService :catalog_service ;
+    :hasSeverity :SEV3 .
+
+:read_invoice_db a :Tool .
+:submit_payment a :Tool ;
+    :requiresPermission :FinanceWriteAccess .
+:export_secrets a :Tool ;
+    :requiresPermission :AdminSecretAccess .
+
+:expense_reconciler a :Skill, prov:Entity ;
+    :declaresTool :read_invoice_db ;
+    :declaresTool :submit_payment ;
+    :hasVerificationStatus :Unverified .
+
+:safe_read_skill a :Skill, prov:Entity ;
+    :hasVerificationStatus :Verified ;
+    :declaresTool :read_invoice_db .
+
+:unknown_provenance_skill a :Skill, prov:Entity ;
+    :hasVerificationStatus :Unknown ;
+    :declaresTool :submit_payment .
+
+:admin_ops_skill a :Skill, prov:Entity ;
+    :hasVerificationStatus :Verified ;
+    :declaresTool :export_secrets .
+
+:credential_harvester a :Skill, prov:Entity ;
+    :hasVerificationStatus :Unverified ;
+    :declaresTool :export_secrets .
+
+:prompt_injector a :Skill, prov:Entity ;
+    :hasVerificationStatus :Unverified .
+
+:harvest_creds_instruction a :CredentialExfiltrationInstruction, :MaliciousSkillInstruction .
+:inject_instruction a :PromptInjectionInstruction, :MaliciousSkillInstruction .
+
+:sensitive_hr_data a :DataAsset ;
+    :hasClassification :sensitive .
+
+:financial_export a :DataAsset ;
+    :hasClassification :confidential .
+
+# Reusable ticket individuals (status is a plain string for OPA parity)
+:CHG_APPROVED a :ChangeTicket ;
+    :hasStatus "Approved" .
+
+:CHG_PENDING a :ChangeTicket ;
+    :hasStatus "Pending" .
+
+# Break-glass individuals (type encodes validity for SHACL targeting)
+:bg_exception_valid a :ActiveBreakGlassException ;
+    :grantedTo :user_123 ;
+    :exceptionStatus :active ;
+    :expiresAt "2099-12-31T23:59:59Z"^^xsd:dateTime .
+
+:bg_exception_expired a :BreakGlassException ;
+    :grantedTo :user_123 ;
+    :exceptionStatus :expired ;
+    :expiresAt "2020-01-01T00:00:00Z"^^xsd:dateTime .
+
+# Catalog entities for state scenarios (inactive / unbound by default).
+# Scenarios that need them assert the active link on the action.
 :srv_123_maintenance a :MaintenanceWindow ;
     :appliesToServer :srv_123 ;
     :windowStatus :active .
@@ -72,49 +123,3 @@
     :affectsService :payment_service ;
     :hasSeverity :SEV1 ;
     :incidentStatus :open .
-
-# ── Tier 6: Break-glass exception entities ──────────────────────────────────
-:bg_exception_valid a :BreakGlassException ;
-    :grantedTo :user_123 ;
-    :expiresAt "2099-12-31T23:59:59Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-    :exceptionStatus :active .
-
-:bg_exception_expired a :BreakGlassException ;
-    :grantedTo :user_123 ;
-    :expiresAt "2020-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-    :exceptionStatus :expired .
-
-# ── Tier 7: Obligation entities ─────────────────────────────────────────────
-:sensitive_hr_data a :DataAsset ;
-    :hasClassification :sensitive .
-
-:financial_export a :DataAsset ;
-    :hasClassification :confidential .
-
-# ── Tier 9: Adversarial skill entities ─────────────────────────────────────
-:credential_harvester a :Skill, <http://www.w3.org/ns/prov#Entity> ;
-    :hasDisclosureState :loaded ;
-    :hasInstruction :harvest_creds_instruction .
-
-:harvest_creds_instruction a :CredentialExfiltrationInstruction .
-
-:prompt_injector a :Skill, <http://www.w3.org/ns/prov#Entity> ;
-    :hasDisclosureState :loaded ;
-    :hasInstruction :inject_instruction .
-
-:inject_instruction a :CredentialExfiltrationInstruction .
-
-:unknown_provenance_skill a :Skill, <http://www.w3.org/ns/prov#Entity> ;
-    :hasVerificationStatus :Unknown ;
-    :declaresTool :submit_payment .
-
-:safe_read_skill a :Skill, <http://www.w3.org/ns/prov#Entity> ;
-    :hasVerificationStatus :Verified ;
-    :declaresTool :read_invoice_db .
-
-# ── Change tickets ───────────────────────────────────────────────────────────
-:CHG_APPROVED a :ChangeTicket ;
-    :hasStatus "Approved" .
-
-:CHG_PENDING a :ChangeTicket ;
-    :hasStatus "Pending" .

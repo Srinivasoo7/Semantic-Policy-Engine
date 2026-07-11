@@ -1,1 +1,14 @@
-{"scenario_id":"skill_finance_write_bundled_review","tier":8,"tier_name":"Skill composition/provenance","action_type":"SkillInvocation","requested_by":"user_123","performed_by":"agent_01","targets":"expense_reconciler","disclosure_state":"advertised","reason":"preload unverified finance-write skill","change_tickets":[],"exceptions":[],"instructions":[]}
+{
+  "scenario_id": "skill_finance_write_bundled_review",
+  "tier": 7,
+  "tier_name": "Skill composition/provenance",
+  "action_type": "SkillInvocation",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "expense_reconciler",
+  "reason": "skill_finance_write_bundled_review",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": [],
+  "disclosure_state": "advertised"
+}

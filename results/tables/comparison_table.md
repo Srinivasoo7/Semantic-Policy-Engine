@@ -1,100 +1,103 @@
 # Benchmark Results Comparison
 
-| Scenario | Tier | System | Decision | Correct | Latency Median (ms) | Explanation Score | M1 | M2 | M3 | M4 | M5 |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `read_public_allowed` | 1 | `rdf_owl_shacl` | ALLOW | True | 633.28 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `read_public_allowed` | 1 | `opa_set` | ALLOW | True | 8.6 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `read_public_allowed` | 1 | `opa_derived` | ALLOW | True | 73.477 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_dev_allowed` | 1 | `rdf_owl_shacl` | ALLOW | True | 577.0 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_dev_allowed` | 1 | `opa_set` | ALLOW | True | 7.664 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_dev_allowed` | 1 | `opa_derived` | ALLOW | True | 78.319 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_prod_approved` | 2 | `rdf_owl_shacl` | ALLOW | True | 553.338 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_prod_approved` | 2 | `opa_set` | ALLOW | True | 6.714 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_prod_approved` | 2 | `opa_derived` | ALLOW | True | 69.606 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 557.163 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_staging_allowed` | 2 | `opa_set` | ALLOW | True | 7.461 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 65.599 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 549.132 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_allowed` | 2 | `opa_set` | ALLOW | True | 6.929 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 71.187 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 612.292 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_staging_allowed` | 2 | `opa_set` | ALLOW | True | 9.234 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 71.401 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_prod` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 569.565 | 5/5 | 0 | 1 | 1 | 0 | 3 |
-| `deploy_prod` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.887 | 2/5 | 0 | 0 | 1 | 1 | 3 |
-| `deploy_prod` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 75.45 | 4/5 | 0 | 0 | 1 | 1 | 3 |
-| `restart_allowed` | 3 | `rdf_owl_shacl` | ALLOW | True | 588.106 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_allowed` | 3 | `opa_set` | ALLOW | True | 6.518 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_allowed` | 3 | `opa_derived` | ALLOW | True | 64.783 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_customer_facing` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 580.69 | 5/5 | 0 | 1 | 1 | 0 | 1 |
-| `restart_customer_facing` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.388 | 3/5 | 0 | 0 | 1 | 1 | 1 |
-| `restart_customer_facing` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 63.464 | 5/5 | 0 | 0 | 1 | 1 | 1 |
-| `restart_denied` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 577.931 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_denied` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.222 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_denied` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 63.716 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_new_prod_server` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 634.314 | 5/5 | 0 | 0 | 1 | 0 | 1 |
-| `restart_new_prod_server` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.301 | 3/5 | 0 | 0 | 1 | 1 | 1 |
-| `restart_new_prod_server` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 66.365 | 5/5 | 0 | 0 | 1 | 0 | 1 |
-| `deploy_during_freeze_denied` | 4 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 567.501 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_during_freeze_denied` | 4 | `opa_set` | REQUIRE_APPROVAL | True | 8.325 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_during_freeze_denied` | 4 | `opa_derived` | REQUIRE_APPROVAL | True | 72.156 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_freeze_allowed` | 4 | `rdf_owl_shacl` | ALLOW | True | 583.507 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_freeze_allowed` | 4 | `opa_set` | ALLOW | True | 7.822 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_freeze_allowed` | 4 | `opa_derived` | ALLOW | True | 77.923 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_active_incident` | 4 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 626.326 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_active_incident` | 4 | `opa_set` | REQUIRE_APPROVAL | True | 6.176 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_active_incident` | 4 | `opa_derived` | REQUIRE_APPROVAL | True | 77.564 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_in_maintenance_allowed` | 4 | `rdf_owl_shacl` | ALLOW | True | 590.104 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_in_maintenance_allowed` | 4 | `opa_set` | ALLOW | True | 7.01 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_in_maintenance_allowed` | 4 | `opa_derived` | ALLOW | True | 69.427 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_break_glass_allowed` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 553.826 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_break_glass_allowed` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 6.387 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_break_glass_allowed` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 68.743 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_exception_denied` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 562.485 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_exception_denied` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 8.348 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `deploy_no_exception_denied` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 77.171 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_allowed` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 577.547 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_allowed` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 9.722 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_allowed` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 66.356 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_expired` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 581.236 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_expired` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 6.528 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `restart_break_glass_expired` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 64.941 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_prod` | 6 | `rdf_owl_shacl` | ALLOW_WITH_OBLIGATION | True | 565.679 | 5/5 | 0 | 1 | 1 | 0 | 3 |
-| `query_logs_prod` | 6 | `opa_set` | ALLOW_WITH_OBLIGATION | True | 7.858 | 2/5 | 0 | 0 | 1 | 1 | 3 |
-| `query_logs_prod` | 6 | `opa_derived` | ALLOW_WITH_OBLIGATION | True | 79.228 | 4/5 | 0 | 0 | 1 | 1 | 3 |
-| `query_logs_sensitive_obligation` | 6 | `rdf_owl_shacl` | ALLOW_WITH_OBLIGATION | True | 551.377 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_sensitive_obligation` | 6 | `opa_set` | ALLOW_WITH_OBLIGATION | True | 6.366 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_sensitive_obligation` | 6 | `opa_derived` | ALLOW_WITH_OBLIGATION | True | 66.1 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_no_audit` | 6 | `rdf_owl_shacl` | ALLOW | True | 550.163 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_no_audit` | 6 | `opa_set` | ALLOW | True | 6.466 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_staging_no_audit` | 6 | `opa_derived` | ALLOW | True | 79.409 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_with_audit_allowed` | 6 | `rdf_owl_shacl` | ALLOW | True | 588.153 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_with_audit_allowed` | 6 | `opa_set` | ALLOW | True | 12.988 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `query_logs_with_audit_allowed` | 6 | `opa_derived` | ALLOW | True | 81.545 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_finance_write_bundled_review` | 7 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 616.485 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_finance_write_bundled_review` | 7 | `opa_set` | REQUIRE_APPROVAL | True | 6.886 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_finance_write_bundled_review` | 7 | `opa_derived` | REQUIRE_APPROVAL | True | 71.496 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_postload_denied` | 7 | `rdf_owl_shacl` | DENY | True | 583.798 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_postload_denied` | 7 | `opa_set` | DENY | True | 6.121 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_postload_denied` | 7 | `opa_derived` | DENY | True | 72.991 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_preload_review` | 7 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 610.12 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_preload_review` | 7 | `opa_set` | REQUIRE_APPROVAL | True | 7.003 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_preload_review` | 7 | `opa_derived` | REQUIRE_APPROVAL | True | 80.473 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_safe_read_allowed` | 7 | `rdf_owl_shacl` | ALLOW | True | 601.293 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_safe_read_allowed` | 7 | `opa_set` | ALLOW | True | 7.046 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_safe_read_allowed` | 7 | `opa_derived` | ALLOW | True | 81.109 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_unknown_provenance_review` | 7 | `rdf_owl_shacl` | ALLOW | True | 635.573 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_unknown_provenance_review` | 7 | `opa_set` | ALLOW | True | 6.771 | 2/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_unknown_provenance_review` | 7 | `opa_derived` | ALLOW | True | 74.64 | 4/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_admin_tool_review` | 8 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 582.573 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_admin_tool_review` | 8 | `opa_set` | REQUIRE_APPROVAL | True | 6.626 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_admin_tool_review` | 8 | `opa_derived` | REQUIRE_APPROVAL | True | 66.091 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_credential_harvester_denied` | 8 | `rdf_owl_shacl` | DENY | True | 575.393 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_credential_harvester_denied` | 8 | `opa_set` | DENY | True | 6.218 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_credential_harvester_denied` | 8 | `opa_derived` | DENY | True | 72.532 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_hidden_exfil_denied` | 8 | `rdf_owl_shacl` | DENY | True | 574.876 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_hidden_exfil_denied` | 8 | `opa_set` | DENY | True | 7.034 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_hidden_exfil_denied` | 8 | `opa_derived` | DENY | True | 67.041 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_prompt_injector_denied` | 8 | `rdf_owl_shacl` | DENY | True | 621.971 | 5/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_prompt_injector_denied` | 8 | `opa_set` | DENY | True | 8.735 | 3/5 | 0 | 0 | 0 | 0 | 0 |
-| `skill_prompt_injector_denied` | 8 | `opa_derived` | DENY | True | 105.342 | 5/5 | 0 | 0 | 0 | 0 | 0 |
+Explanation score is runtime field-export completeness over **c1–c4** (asserted facts, inferred/derived facts, violated policy, decision reason); max 4.
+Maintainability is reported separately in `maintainability_e1_e3.md` (experiments E1–E3).
+
+| Scenario | Tier | System | Decision | Correct | Latency Median (ms) | Explanation Score |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `read_public_allowed` | 1 | `rdf_owl_shacl` | ALLOW | True | 169.996 | 3/4 |
+| `read_public_allowed` | 1 | `opa_set` | ALLOW | True | 6.272 | 2/4 |
+| `read_public_allowed` | 1 | `opa_derived` | ALLOW | True | 26.791 | 2/4 |
+| `restart_dev_allowed` | 1 | `rdf_owl_shacl` | ALLOW | True | 182.248 | 3/4 |
+| `restart_dev_allowed` | 1 | `opa_set` | ALLOW | True | 6.365 | 2/4 |
+| `restart_dev_allowed` | 1 | `opa_derived` | ALLOW | True | 27.042 | 2/4 |
+| `deploy_prod_approved` | 2 | `rdf_owl_shacl` | ALLOW | True | 187.401 | 3/4 |
+| `deploy_prod_approved` | 2 | `opa_set` | ALLOW | True | 7.112 | 2/4 |
+| `deploy_prod_approved` | 2 | `opa_derived` | ALLOW | True | 29.111 | 3/4 |
+| `deploy_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 181.697 | 3/4 |
+| `deploy_staging_allowed` | 2 | `opa_set` | ALLOW | True | 6.431 | 2/4 |
+| `deploy_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 26.986 | 3/4 |
+| `query_logs_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 172.658 | 3/4 |
+| `query_logs_staging_allowed` | 2 | `opa_set` | ALLOW | True | 6.275 | 2/4 |
+| `query_logs_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 26.972 | 3/4 |
+| `restart_staging_allowed` | 2 | `rdf_owl_shacl` | ALLOW | True | 183.449 | 3/4 |
+| `restart_staging_allowed` | 2 | `opa_set` | ALLOW | True | 6.55 | 2/4 |
+| `restart_staging_allowed` | 2 | `opa_derived` | ALLOW | True | 26.693 | 3/4 |
+| `deploy_prod` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 187.348 | 4/4 |
+| `deploy_prod` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.277 | 2/4 |
+| `deploy_prod` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 32.051 | 3/4 |
+| `restart_allowed` | 3 | `rdf_owl_shacl` | ALLOW | True | 182.736 | 3/4 |
+| `restart_allowed` | 3 | `opa_set` | ALLOW | True | 6.294 | 2/4 |
+| `restart_allowed` | 3 | `opa_derived` | ALLOW | True | 27.206 | 3/4 |
+| `restart_customer_facing` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 198.127 | 4/4 |
+| `restart_customer_facing` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.751 | 3/4 |
+| `restart_customer_facing` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 27.236 | 4/4 |
+| `restart_denied` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 181.598 | 4/4 |
+| `restart_denied` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.387 | 3/4 |
+| `restart_denied` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 27.002 | 4/4 |
+| `restart_new_prod_server` | 3 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 181.783 | 4/4 |
+| `restart_new_prod_server` | 3 | `opa_set` | REQUIRE_APPROVAL | True | 6.635 | 3/4 |
+| `restart_new_prod_server` | 3 | `opa_derived` | REQUIRE_APPROVAL | True | 27.226 | 4/4 |
+| `deploy_during_freeze_denied` | 4 | `rdf_owl_shacl` | DENY | True | 179.899 | 4/4 |
+| `deploy_during_freeze_denied` | 4 | `opa_set` | DENY | True | 6.481 | 3/4 |
+| `deploy_during_freeze_denied` | 4 | `opa_derived` | DENY | True | 27.125 | 4/4 |
+| `deploy_no_freeze_allowed` | 4 | `rdf_owl_shacl` | ALLOW | True | 179.388 | 3/4 |
+| `deploy_no_freeze_allowed` | 4 | `opa_set` | ALLOW | True | 6.404 | 2/4 |
+| `deploy_no_freeze_allowed` | 4 | `opa_derived` | ALLOW | True | 27.016 | 3/4 |
+| `restart_active_incident` | 4 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 185.618 | 4/4 |
+| `restart_active_incident` | 4 | `opa_set` | REQUIRE_APPROVAL | True | 6.313 | 3/4 |
+| `restart_active_incident` | 4 | `opa_derived` | REQUIRE_APPROVAL | True | 27.16 | 4/4 |
+| `restart_in_maintenance_allowed` | 4 | `rdf_owl_shacl` | ALLOW | True | 181.705 | 3/4 |
+| `restart_in_maintenance_allowed` | 4 | `opa_set` | ALLOW | True | 6.338 | 2/4 |
+| `restart_in_maintenance_allowed` | 4 | `opa_derived` | ALLOW | True | 27.367 | 3/4 |
+| `deploy_break_glass_allowed` | 5 | `rdf_owl_shacl` | ALLOW | True | 182.303 | 3/4 |
+| `deploy_break_glass_allowed` | 5 | `opa_set` | ALLOW | True | 6.511 | 2/4 |
+| `deploy_break_glass_allowed` | 5 | `opa_derived` | ALLOW | True | 26.861 | 3/4 |
+| `deploy_no_exception_denied` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 180.193 | 4/4 |
+| `deploy_no_exception_denied` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 6.299 | 2/4 |
+| `deploy_no_exception_denied` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 26.883 | 3/4 |
+| `restart_break_glass_allowed` | 5 | `rdf_owl_shacl` | ALLOW | True | 180.924 | 3/4 |
+| `restart_break_glass_allowed` | 5 | `opa_set` | ALLOW | True | 6.419 | 2/4 |
+| `restart_break_glass_allowed` | 5 | `opa_derived` | ALLOW | True | 27.486 | 3/4 |
+| `restart_break_glass_expired` | 5 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 190.196 | 4/4 |
+| `restart_break_glass_expired` | 5 | `opa_set` | REQUIRE_APPROVAL | True | 6.917 | 3/4 |
+| `restart_break_glass_expired` | 5 | `opa_derived` | REQUIRE_APPROVAL | True | 28.867 | 4/4 |
+| `query_logs_prod` | 6 | `rdf_owl_shacl` | ALLOW_WITH_OBLIGATION | True | 175.958 | 4/4 |
+| `query_logs_prod` | 6 | `opa_set` | ALLOW_WITH_OBLIGATION | True | 6.256 | 2/4 |
+| `query_logs_prod` | 6 | `opa_derived` | ALLOW_WITH_OBLIGATION | True | 27.075 | 3/4 |
+| `query_logs_sensitive_obligation` | 6 | `rdf_owl_shacl` | ALLOW_WITH_OBLIGATION | True | 173.727 | 4/4 |
+| `query_logs_sensitive_obligation` | 6 | `opa_set` | ALLOW_WITH_OBLIGATION | True | 6.371 | 2/4 |
+| `query_logs_sensitive_obligation` | 6 | `opa_derived` | ALLOW_WITH_OBLIGATION | True | 27.2 | 3/4 |
+| `query_logs_staging_no_audit` | 6 | `rdf_owl_shacl` | ALLOW | True | 172.22 | 3/4 |
+| `query_logs_staging_no_audit` | 6 | `opa_set` | ALLOW | True | 6.285 | 2/4 |
+| `query_logs_staging_no_audit` | 6 | `opa_derived` | ALLOW | True | 27.275 | 3/4 |
+| `query_logs_with_audit_allowed` | 6 | `rdf_owl_shacl` | ALLOW | True | 175.324 | 3/4 |
+| `query_logs_with_audit_allowed` | 6 | `opa_set` | ALLOW | True | 6.284 | 2/4 |
+| `query_logs_with_audit_allowed` | 6 | `opa_derived` | ALLOW | True | 26.893 | 3/4 |
+| `skill_finance_write_bundled_review` | 7 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 183.967 | 4/4 |
+| `skill_finance_write_bundled_review` | 7 | `opa_set` | REQUIRE_APPROVAL | True | 6.385 | 3/4 |
+| `skill_finance_write_bundled_review` | 7 | `opa_derived` | REQUIRE_APPROVAL | True | 28.377 | 4/4 |
+| `skill_postload_denied` | 7 | `rdf_owl_shacl` | DENY | True | 186.675 | 4/4 |
+| `skill_postload_denied` | 7 | `opa_set` | DENY | True | 6.27 | 3/4 |
+| `skill_postload_denied` | 7 | `opa_derived` | DENY | True | 27.24 | 4/4 |
+| `skill_preload_review` | 7 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 190.883 | 4/4 |
+| `skill_preload_review` | 7 | `opa_set` | REQUIRE_APPROVAL | True | 6.979 | 3/4 |
+| `skill_preload_review` | 7 | `opa_derived` | REQUIRE_APPROVAL | True | 28.184 | 4/4 |
+| `skill_safe_read_allowed` | 7 | `rdf_owl_shacl` | ALLOW | True | 199.774 | 3/4 |
+| `skill_safe_read_allowed` | 7 | `opa_set` | ALLOW | True | 6.36 | 2/4 |
+| `skill_safe_read_allowed` | 7 | `opa_derived` | ALLOW | True | 28.644 | 2/4 |
+| `skill_unknown_provenance_review` | 7 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 183.076 | 4/4 |
+| `skill_unknown_provenance_review` | 7 | `opa_set` | REQUIRE_APPROVAL | True | 6.492 | 3/4 |
+| `skill_unknown_provenance_review` | 7 | `opa_derived` | REQUIRE_APPROVAL | True | 27.192 | 4/4 |
+| `skill_admin_tool_review` | 8 | `rdf_owl_shacl` | REQUIRE_APPROVAL | True | 183.537 | 4/4 |
+| `skill_admin_tool_review` | 8 | `opa_set` | REQUIRE_APPROVAL | True | 6.444 | 3/4 |
+| `skill_admin_tool_review` | 8 | `opa_derived` | REQUIRE_APPROVAL | True | 26.915 | 4/4 |
+| `skill_credential_harvester_denied` | 8 | `rdf_owl_shacl` | DENY | True | 192.055 | 4/4 |
+| `skill_credential_harvester_denied` | 8 | `opa_set` | DENY | True | 6.483 | 3/4 |
+| `skill_credential_harvester_denied` | 8 | `opa_derived` | DENY | True | 26.842 | 4/4 |
+| `skill_hidden_exfil_denied` | 8 | `rdf_owl_shacl` | DENY | True | 184.21 | 4/4 |
+| `skill_hidden_exfil_denied` | 8 | `opa_set` | DENY | True | 6.712 | 3/4 |
+| `skill_hidden_exfil_denied` | 8 | `opa_derived` | DENY | True | 27.19 | 4/4 |
+| `skill_prompt_injector_denied` | 8 | `rdf_owl_shacl` | DENY | True | 188.854 | 4/4 |
+| `skill_prompt_injector_denied` | 8 | `opa_set` | DENY | True | 6.309 | 3/4 |
+| `skill_prompt_injector_denied` | 8 | `opa_derived` | DENY | True | 29.136 | 3/4 |

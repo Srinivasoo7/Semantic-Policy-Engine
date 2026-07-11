@@ -2,12 +2,12 @@
   "scenario_id": "query_logs_staging_no_audit",
   "tier": 6,
   "tier_name": "Obligation",
-  "action_type": "QueryLogsAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_456",
+  "suite": "core",
   "expected_decision": "ALLOW",
-  "description": "Benchmark scenario for query_logs_staging_no_audit",
+  "causal_features": [
+    "staging_environment",
+    "obligation_not_required"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

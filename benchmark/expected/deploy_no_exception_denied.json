@@ -2,12 +2,13 @@
   "scenario_id": "deploy_no_exception_denied",
   "tier": 5,
   "tier_name": "Exception/break-glass",
-  "action_type": "DeployAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_123",
+  "suite": "extension",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Benchmark scenario for deploy_no_exception_denied",
+  "causal_features": [
+    "production_server",
+    "no_break_glass",
+    "no_approved_ticket"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

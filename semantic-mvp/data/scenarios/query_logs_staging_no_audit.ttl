@@ -1,5 +1,4 @@
 @prefix : <http://example.org/agent-policy#> .
-:action_query_staging_no_audit a :QueryLogsAction ;
+:action_query_logs_staging_no_audit a :QueryLogsAction ;
     :requestedBy :user_123 ; :performedBy :agent_01 ;
-    :targets :srv_456 ;
-    :hasReason "query staging logs no audit obligation required" .
+    :targets :srv_456 ; :hasReason "staging logs without audit flag" .

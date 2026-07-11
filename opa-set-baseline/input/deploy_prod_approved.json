@@ -1,1 +1,18 @@
-{"scenario_id":"deploy_prod_approved","tier":2,"tier_name":"Attribute-based","action_type":"DeployAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"deploy with approved ticket","change_tickets":[{"id":"CHG_APPROVED","status":"Approved"}],"exceptions":[],"instructions":[]}
+{
+  "scenario_id": "deploy_prod_approved",
+  "tier": 2,
+  "tier_name": "Attribute-based",
+  "action_type": "DeployAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_123",
+  "reason": "deploy_prod_approved",
+  "change_tickets": [
+    {
+      "id": "CHG_APPROVED",
+      "status": "Approved"
+    }
+  ],
+  "exceptions": [],
+  "instructions": []
+}

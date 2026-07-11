@@ -1,11 +1,14 @@
 {
+  "scenario_id": "query_logs_prod",
+  "tier": 6,
+  "tier_name": "Obligation",
   "action_type": "QueryLogsAction",
   "requested_by": "user_123",
   "performed_by": "agent_01",
-  "targets": "srv_777",
-  "reason": "querying logs from a pci-dss server",
-  "has_audit_obligation": false,
+  "targets": "srv_123",
+  "reason": "query_logs_prod",
   "change_tickets": [],
   "exceptions": [],
-  "instructions": []
+  "instructions": [],
+  "has_audit_obligation": false
 }

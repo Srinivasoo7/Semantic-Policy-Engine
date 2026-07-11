@@ -1,11 +1,14 @@
 {
+  "scenario_id": "skill_preload_review",
+  "tier": 7,
+  "tier_name": "Skill composition/provenance",
   "action_type": "SkillInvocation",
   "requested_by": "user_123",
   "performed_by": "agent_01",
   "targets": "expense_reconciler",
-  "disclosure_state": "advertised",
-  "reason": "monthly invoice closeout",
+  "reason": "skill_preload_review",
   "change_tickets": [],
   "exceptions": [],
-  "instructions": []
+  "instructions": [],
+  "disclosure_state": "advertised"
 }

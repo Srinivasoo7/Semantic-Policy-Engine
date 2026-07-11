@@ -1,90 +1,121 @@
 # Research Claims — Frozen Scope
 
-**Version:** 1.0  
-**Status:** Frozen — do not change without explicit revision and re-sign-off.
+**Version:** 1.1  
+**Status:** Frozen for post-repair artifact — update only with suite/results re-freeze.
 
 ---
 
 ## Main Claim
 
-> RDF/OWL/SHACL does not necessarily improve decision accuracy over strong rule-based baselines (OPA-set, OPA-derived). In terms of latency, RDF/OWL/SHACL is roughly two orders of magnitude slower than the lightweight OPA-set baseline, but only single-digit multiples slower than the stronger OPA-derived baseline in the current cold-evaluation prototype. In terms of explanation, RDF/OWL/SHACL produces substantially richer explanations than OPA-set, but OPA-derived can approach or match RDF/OWL/SHACL explanation completeness when explicitly engineered to export derived predicate traces. The strongest remaining distinction is maintainability location: RDF/OWL/SHACL localizes semantic class definitions in OWL, OPA-derived localizes them in Rego predicates over JSON, and OPA-set localizes them in explicit classification sets.
+> RDF/OWL/SHACL does not necessarily improve decision accuracy over strong rule-based baselines (OPA-set, OPA-derived). Under **configured behavioral parity** on a shared 32-scenario suite, the systems differ in (1) **where semantic abstractions live**, (2) **which explanation fields are exported at runtime**, and (3) **cold-path latency**. RDF/OWL/SHACL localizes class definitions in OWL; OPA-derived localizes them in Rego predicates over JSON; OPA-set localizes them in explicit membership sets. OPA-derived can approach RDF/OWL/SHACL explanation field-export completeness when engineered to export derived traces. Semantic validation is slower on the current cold-evaluation Python prototype.
 
-This is a **maintainability and explanation completeness** claim, not a raw accuracy superiority claim.
+This is a **maintainability-location, explanation field-export, and latency** claim — not an accuracy-superiority claim.
+
+---
+
+## Decision Algebra (shared)
+
+```
+DENY ≻ REQUIRE_APPROVAL ≻ ALLOW_WITH_OBLIGATION ≻ ALLOW
+```
+
+Outcomes evaluated in this paper: `ALLOW`, `DENY`, `REQUIRE_APPROVAL`, `ALLOW_WITH_OBLIGATION`.
+
+The semantic engine maps violated SHACL shapes to this algebra via an explicit decision adapter; Rego uses an `else` priority chain.
+
+---
+
+## ProductionServer definition (frozen, identical across systems)
+
+A server is a `ProductionServer` if it is a `Server` and any of:
+
+1. `belongsToEnvironment` / `environment` = `production`
+2. `hasCriticality` / `criticality` = `customer_facing`
+3. tag / tags contains `pci-dss`
 
 ---
 
 ## Supported Hypotheses
 
-| ID  | Hypothesis                                                                                                 | Evidence strategy                                                             |
-|-----|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| H3  | RDF/OWL/SHACL produces substantially richer explanations than OPA-set; OPA-derived can approach or match RDF/OWL/SHACL explanation completeness when explicitly engineered to export derived predicate traces | Explanation-completeness (field-completeness) metric across all 3 systems      |
-| H4  | RDF/OWL/SHACL requires fewer enforcement-policy edits when semantic class definitions change               | Maintainability metrics M1–M5 across E1–E3                                    |
-| RQ6 | The latency overhead of OWL inference + SHACL validation is roughly two orders of magnitude slower than the lightweight OPA-set baseline, but only single-digit multiples slower than the stronger OPA-derived baseline in the current cold-evaluation prototype, supporting feasibility for high-impact, non-realtime action gates rather than high-frequency realtime tool-call filtering | Latency benchmark across 100/500/1000 iterations on all 8 core scenarios      |
+| ID  | Hypothesis | Evidence strategy |
+|-----|------------|-------------------|
+| H1  | All three systems can reproduce expected decisions after configuration | Decision match on 32 scenarios |
+| H2  | RDF/OWL/SHACL incurs higher cold-path latency than OPA baselines | Latency harness |
+| H3  | RDF/OWL/SHACL exports richer structured fields than OPA-set; OPA-derived can approach it when traces are exported | Explanation field-export score c1–c4 (max 4) |
+| H4  | When class definitions evolve, edit location differs: OWL vs Rego predicate vs set | Maintainability experiments E1–E3 |
 
 ---
 
 ## What We Claim
 
-- Semantic system localises domain-class changes in the OWL layer; SHACL shapes remain untouched when the class definition evolves.
-- When a domain abstraction (e.g. `ProductionServer`) is reused across N enforcement policies, a single semantic edit propagates automatically to all N policies.
-- Explanations from the semantic system trace fact → inference → violated policy, which is more auditable than set-membership or predicate-evaluation traces.
-- All three systems (RDF/OWL/SHACL, OPA-set, OPA-derived) can reach **behavioural parity** given appropriate configuration.
-
----
+- Semantic system localises domain-class changes in the OWL layer; SHACL shapes remain untouched when the class definition evolves (E2).
+- Modular OPA-derived achieves similar fan-out via shared predicates; the distinction is **location**, not exclusive fan-out ability (E3).
+- Runtime explanation artifacts can include asserted facts, inferred/derived classifications, violated rule/shape, and reason text.
+- All three systems reach **configured behavioral parity** on the frozen suite.
 
 ## What We Do NOT Claim
 
-- That RDF/OWL/SHACL is universally superior to OPA in all dimensions.
-- That OPA is unsafe or unsuitable for AI agent governance.
-- That the semantic system is novel as a runtime action firewall (related work already exists).
-- That the semantic system beats all baselines in decision accuracy.
-- That the benchmark is representative of real enterprise production systems (it is synthetic).
-- Anything about NVIDIA SkillSpector, Agent Skills in the Wild, SoK Agentic Skills, or Governance-as-a-Service without verified citations.
+- That RDF/OWL/SHACL is universally superior to OPA.
+- That OPA is unsafe or unsuitable for agent governance.
+- That the semantic path is a novel runtime interceptor architecture.
+- Accuracy or generalization beyond the curated suite.
+- That the benchmark represents real enterprise production traffic.
+- Human explanation quality (no blinded reconstruction study yet).
+- That a hybrid OPA+semantic router was empirically evaluated (deployment recommendation only).
 
 ---
 
-## Maintainability Metrics
+## Benchmark Structure
 
-| Metric | Name                            | Definition                                                                   |
-|--------|---------------------------------|------------------------------------------------------------------------------|
-| M1     | Enforcement-policy edits        | Number of SHACL shape or Rego allow/deny rule edits required                 |
-| M2     | Semantic-definition edits       | Number of OWL equivalentClass / unionOf definition edits required            |
-| M3     | Data edits                      | Number of enterprise fact additions or changes required                      |
-| M4     | Classification-code edits       | Number of Rego predicate edits (e.g. `is_production_server()`) required      |
-| M5     | Dependent policies affected     | Number of dependent enforcement policies affected by one centralized abstraction edit |
+- **Total:** 32 scenarios
+- **Core suite:** scenarios whose causal features match long-standing production/ticket/skill/obligation rules
+- **Extension suite:** state, break-glass, unknown provenance, admin-secret, prompt-injection — **implemented in all three systems** with causal features recorded in `benchmark/expected/*.json`
 
----
+Each expected record includes:
 
-## Decision Vocabulary
-
-| Decision               | Meaning                                                                   |
-|------------------------|---------------------------------------------------------------------------|
-| `ALLOW`                | Action permitted without restriction                                      |
-| `DENY`                 | Action blocked; must not proceed                                          |
-| `REQUIRE_APPROVAL`     | Human approval required before action proceeds                            |
-| `ALLOW_WITH_OBLIGATION`| Action permitted but must be logged / audited (obligation policy)         |
-| `REQUIRE_CLARIFICATION`| Insufficient information to make a decision; action is paused             |
+- `expected_decision`
+- `suite` (`core` | `extension`)
+- `causal_features` (what actually drives the decision)
 
 ---
 
-## Benchmark Target
+## Maintainability Metrics (E1–E3 only)
 
-- **Minimum:** 30 scenarios
-- **Ideal:** 36–40 scenarios
-- **Maximum for first submission:** 50 scenarios (only if time allows)
+| Metric | Name | Definition |
+|--------|------|------------|
+| M1 | Enforcement-policy edits | SHACL shape or Rego allow/deny rule edits |
+| M2 | Semantic-definition edits | OWL equivalentClass / unionOf edits |
+| M3 | Data edits | Enterprise fact / JSON record edits |
+| M4 | Classification-code edits | Rego set membership or `is_*` predicate edits |
+| M5 | Dependent policies affected | Enforcement policies that reuse the abstraction |
 
-Scenario distribution: see `benchmark/schemas/` for tier definitions.
+Experiments:
+
+- **E1** Add new production server  
+- **E2** Expand ProductionServer definition  
+- **E3** Abstraction reused by three policies (restart, deploy, query-logs)
+
+---
+
+## Explanation Metric
+
+Runtime field-export completeness (main score, max 4):
+
+1. asserted facts  
+2. inferred / derived facts  
+3. violated policy / rule  
+4. decision reason  
+
+`reconstructable_*` annotations in expected JSON are **optional metadata only** and are **not** part of the main score.
 
 ---
 
 ## Risky References to Verify Before Submission
 
-The following references must be verified against actual released papers or specifications before inclusion:
+- NVIDIA SkillSpector  
+- Agent Skills in the Wild  
+- SoK Agentic Skills  
+- Governance-as-a-Service  
+- AARM  
 
-- NVIDIA SkillSpector
-- Agent Skills in the Wild
-- SoK Agentic Skills
-- Governance-as-a-Service
-- AARM
-
-If unverifiable, move to future work or remove entirely.
+If unverifiable, remove or move to future work.

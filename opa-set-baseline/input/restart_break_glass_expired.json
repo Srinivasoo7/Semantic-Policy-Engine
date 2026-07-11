@@ -1,1 +1,19 @@
-{"scenario_id":"restart_break_glass_expired","tier":6,"tier_name":"Exception/break-glass","action_type":"RestartServerAction","requested_by":"user_123","performed_by":"agent_01","targets":"srv_123","reason":"restart with expired break-glass exception","change_tickets":[],"exceptions":[{"id":"bg_exception_expired","status":"expired","type":"BreakGlassException"}],"instructions":[]}
+{
+  "scenario_id": "restart_break_glass_expired",
+  "tier": 5,
+  "tier_name": "Exception/break-glass",
+  "action_type": "RestartServerAction",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "srv_123",
+  "reason": "restart_break_glass_expired",
+  "change_tickets": [],
+  "exceptions": [
+    {
+      "id": "bg_exception_expired",
+      "status": "expired",
+      "type": "BreakGlassException"
+    }
+  ],
+  "instructions": []
+}

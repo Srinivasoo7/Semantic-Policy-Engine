@@ -1,1 +1,14 @@
-{"scenario_id":"skill_safe_read_allowed","tier":8,"tier_name":"Skill composition/provenance","action_type":"SkillInvocation","requested_by":"user_123","performed_by":"agent_01","targets":"safe_read_skill","disclosure_state":"loaded","reason":"invoke verified read-only skill","change_tickets":[],"exceptions":[],"instructions":[{"type":"ReadInstruction"}]}
+{
+  "scenario_id": "skill_safe_read_allowed",
+  "tier": 7,
+  "tier_name": "Skill composition/provenance",
+  "action_type": "SkillInvocation",
+  "requested_by": "user_123",
+  "performed_by": "agent_01",
+  "targets": "safe_read_skill",
+  "reason": "skill_safe_read_allowed",
+  "change_tickets": [],
+  "exceptions": [],
+  "instructions": [],
+  "disclosure_state": "advertised"
+}

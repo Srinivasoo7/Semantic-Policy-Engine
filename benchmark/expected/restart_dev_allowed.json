@@ -2,12 +2,11 @@
   "scenario_id": "restart_dev_allowed",
   "tier": 1,
   "tier_name": "Flat access",
-  "action_type": "RestartServerAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_dev",
+  "suite": "core",
   "expected_decision": "ALLOW",
-  "description": "Benchmark scenario for restart_dev_allowed",
+  "causal_features": [
+    "non_production_server"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

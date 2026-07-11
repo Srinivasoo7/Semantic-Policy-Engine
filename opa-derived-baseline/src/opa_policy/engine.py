@@ -97,36 +97,29 @@ def _evaluate(policy_text: str, input_data: dict, root: Path) -> tuple[str, List
         if x_node is not None:
             decision = json.loads(str(x_node))
 
-    # Dynamically check for derived classifications on all entities in the enterprise database
+    # Export derived classifications for the action target only (decision-path
+    # entities). Scanning every enterprise entity here inflates latency and is
+    # not required for the decision itself.
     import re
-    # Scan the policy text for all classification predicates starts with is_
-    rule_names = re.findall(r"\b(is_[a-zA-Z0-9_]+)\(", policy_text)
-    rule_names = sorted(list(set(rule_names)))
 
-    # Collect all potential entities from enterprise data
-    entities = []
-    if "servers" in enterprise_data:
-        entities.extend(enterprise_data["servers"].keys())
-    if "skills" in enterprise_data:
-        entities.extend(enterprise_data["skills"].keys())
-    # Also add the target from input data if it's not already there
+    rule_names = sorted(set(re.findall(r"\b(is_[a-zA-Z0-9_]+)\(", policy_text)))
+    entities: List[str] = []
     target = input_data.get("targets")
-    if target and isinstance(target, str) and target not in entities:
+    if isinstance(target, str) and target:
         entities.append(target)
 
-    inferred_types = []
+    inferred_types: List[str] = []
     for ent in entities:
         for rule in rule_names:
             res = rego.query(f'data.agent_policy.{rule}("{ent}")')
             if res and str(res) != "undefined":
-                # Convert rule name to CamelCase Class Name (e.g. is_production_server -> ProductionServer)
                 parts = rule.split("_")
                 if parts[0] == "is":
                     parts = parts[1:]
                 class_name = "".join(p.capitalize() for p in parts)
                 inferred_types.append(f"{ent} a {class_name}")
 
-    inferred_types = sorted(list(set(inferred_types)))
+    inferred_types = sorted(set(inferred_types))
     return decision, inferred_types
 
 

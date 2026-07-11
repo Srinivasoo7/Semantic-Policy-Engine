@@ -2,12 +2,13 @@
   "scenario_id": "restart_denied",
   "tier": 3,
   "tier_name": "Relationship-dependent",
-  "action_type": "RestartServerAction",
-  "requested_by": "user_123",
-  "performed_by": "agent_01",
-  "targets": "srv_123",
+  "suite": "core",
   "expected_decision": "REQUIRE_APPROVAL",
-  "description": "Restart of a production server without an approved change ticket.",
+  "causal_features": [
+    "production_server",
+    "no_approved_ticket",
+    "no_break_glass"
+  ],
   "maintainability_rdf_owl_shacl": {
     "m1_enforcement_policy_edits": 0,
     "m2_semantic_edits": 0,

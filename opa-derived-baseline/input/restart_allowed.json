@@ -1,12 +1,17 @@
 {
+  "scenario_id": "restart_allowed",
+  "tier": 3,
+  "tier_name": "Relationship-dependent",
   "action_type": "RestartServerAction",
   "requested_by": "user_123",
   "performed_by": "agent_01",
   "targets": "srv_123",
-  "linked_to_ticket": "INC_456",
-  "reason": "payment service failure",
+  "reason": "restart_allowed",
   "change_tickets": [
-    {"id": "CHG_001", "status": "Approved"}
+    {
+      "id": "CHG_001",
+      "status": "Approved"
+    }
   ],
   "exceptions": [],
   "instructions": []

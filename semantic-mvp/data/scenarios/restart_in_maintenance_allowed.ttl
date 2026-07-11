@@ -3,8 +3,4 @@
     :requestedBy :user_123 ; :performedBy :agent_01 ;
     :targets :srv_123 ;
     :hasMaintenanceWindow :srv_123_maintenance ;
-    :hasChangeTicket :CHG_APPROVED ;
-    :hasReason "restart during active maintenance window" .
-
-:CHG_APPROVED a :ChangeTicket ;
-    :hasStatus :Approved .
+    :hasReason "restart during active maintenance window without ticket" .
