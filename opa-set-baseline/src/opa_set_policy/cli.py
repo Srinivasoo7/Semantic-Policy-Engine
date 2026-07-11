@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from opa_policy.engine import run_policy_check, PolicyResult
+from opa_set_policy.engine import run_policy_check, PolicyResult
 
 
 SCENARIOS: dict[str, str] = {

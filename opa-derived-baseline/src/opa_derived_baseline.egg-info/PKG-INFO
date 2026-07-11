@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: opa-derived-baseline
 Version: 0.1.0
-Summary: OPA/Rego baseline for comparing manual vs. OWL-inferred semantic policy encoding
+Summary: OPA/Rego baseline for AI-agent action governance comparison
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 Requires-Dist: regopy==1.4.0
@@ -110,7 +110,7 @@ opa-policy-baseline/
 │   ├── skill_preload_review.json
 │   └── skill_postload_denied.json
 ├── src/
-│   └── opa_policy/
+│   └── opa_derived_policy/
 │       ├── __init__.py
 │       ├── engine.py             ← uses regopy.Interpreter
 │       └── cli.py

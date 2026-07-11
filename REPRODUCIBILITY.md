@@ -9,9 +9,7 @@ pip install -e semantic-mvp/
 pip install -e opa-set-baseline/
 pip install -e opa-derived-baseline/
 
-python3 -m pytest opa-set-baseline/tests/ -q
-python3 -m pytest opa-derived-baseline/tests/ -q
-python3 -m pytest semantic-mvp/tests/ -q
+python3 -m pytest opa-set-baseline/tests/ opa-derived-baseline/tests/ semantic-mvp/tests/ -q
 
 python3 experiments/run_all_experiments.py
 python3 experiments/maintainability.py
@@ -34,16 +32,21 @@ Latency is **environment-dependent** and measures a **cold-evaluation prototype*
 
 ## OPA Package-Name Collision Fix
 
-Earlier versions used the same distribution name for both OPA baselines. The artifact now uses distinct names:
+Earlier versions collided in two ways:
 
-- `opa-set-baseline`
-- `opa-derived-baseline`
+1. **Distribution names** — both used the same pip package name. Now:
+   - `opa-set-baseline`
+   - `opa-derived-baseline`
+2. **Import packages** — both used `opa_policy`, so editable install made one overwrite the other (causing false `enterprise.json` errors on the set baseline). Now:
+   - `opa_set_policy`
+   - `opa_derived_policy`
 
-Reinstall both after pull.
+Reinstall both after pull:
 
-## Pytest note
-
-Run each baseline’s tests in a **separate** pytest invocation. The three packages historically shared a `tests` package basename; separate invocations avoid import collisions.
+```bash
+pip install -e opa-set-baseline/
+pip install -e opa-derived-baseline/
+```
 
 ## Suite integrity
 

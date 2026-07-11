@@ -8,7 +8,7 @@ _src = Path(__file__).resolve().parent / "src"
 if str(_src) not in sys.path:
     sys.path.insert(0, str(_src))
 
-from opa_policy.cli import main  # noqa: E402
+from opa_derived_policy.cli import main  # noqa: E402
 
 if __name__ == "__main__":
     main()

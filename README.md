@@ -88,12 +88,10 @@ pip install -e opa-derived-baseline/
 
 ### Run tests
 
-Run each suite separately (avoids `tests` package name collisions):
+Import packages are intentionally distinct (`opa_set_policy`, `opa_derived_policy`, `semantic_policy`) so all suites can run together:
 
 ```bash
-python3 -m pytest opa-set-baseline/tests/ -q
-python3 -m pytest opa-derived-baseline/tests/ -q
-python3 -m pytest semantic-mvp/tests/ -q
+python3 -m pytest opa-set-baseline/tests/ opa-derived-baseline/tests/ semantic-mvp/tests/ -q
 ```
 
 ### Run measurement harnesses

@@ -1,1 +1,1 @@
-opa_policy
+opa_derived_policy

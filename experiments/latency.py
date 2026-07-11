@@ -50,21 +50,26 @@ def benchmark(iterations: int = 100) -> list[dict]:
             # Setup imports once per system-scenario
             import sys
             for key in list(sys.modules.keys()):
-                if key.startswith("opa_policy") or key.startswith("semantic_policy"):
+                if key.startswith(("opa_policy", "opa_set_policy", "opa_derived_policy", "semantic_policy")):
                     del sys.modules[key]
             src = system_root / "src"
             if str(src) in sys.path:
                 sys.path.remove(str(src))
             sys.path.insert(0, str(src))
-                
+
             times = []
             try:
                 if system_name == "rdf_owl_shacl":
                     from semantic_policy.engine import run_policy_check
                     scenario_file = system_root / "data" / "scenarios" / f"{scenario_id}.ttl"
-                else:
-                    from opa_policy.engine import run_policy_check
+                elif system_name == "opa_set":
+                    from opa_set_policy.engine import run_policy_check
                     scenario_file = system_root / "input" / f"{scenario_id}.json"
+                elif system_name == "opa_derived":
+                    from opa_derived_policy.engine import run_policy_check
+                    scenario_file = system_root / "input" / f"{scenario_id}.json"
+                else:
+                    raise ValueError(f"Unknown system: {system_name}")
                 
                 # Warm up once
                 run_policy_check(scenario_file, root=system_root)

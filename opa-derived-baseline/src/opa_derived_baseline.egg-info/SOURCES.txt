@@ -5,7 +5,7 @@ src/opa_derived_baseline.egg-info/SOURCES.txt
 src/opa_derived_baseline.egg-info/dependency_links.txt
 src/opa_derived_baseline.egg-info/requires.txt
 src/opa_derived_baseline.egg-info/top_level.txt
-src/opa_policy/__init__.py
-src/opa_policy/cli.py
-src/opa_policy/engine.py
-tests/test_scenarios.py
+src/opa_derived_policy/__init__.py
+src/opa_derived_policy/cli.py
+src/opa_derived_policy/engine.py
+tests/test_opa_derived_scenarios.py

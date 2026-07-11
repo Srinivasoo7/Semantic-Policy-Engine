@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from opa_policy.engine import run_policy_check
+from opa_derived_policy.engine import run_policy_check
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent

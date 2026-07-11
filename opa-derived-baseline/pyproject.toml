@@ -1,7 +1,7 @@
 [project]
 name = "opa-derived-baseline"
 version = "0.1.0"
-description = "OPA/Rego baseline for comparing manual vs. OWL-inferred semantic policy encoding"
+description = "OPA/Rego baseline for AI-agent action governance comparison"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
@@ -10,6 +10,14 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest==8.3.5"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["opa_derived_policy*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

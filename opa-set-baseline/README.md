@@ -99,7 +99,7 @@ opa-policy-baseline/
 │   ├── skill_preload_review.json
 │   └── skill_postload_denied.json
 ├── src/
-│   └── opa_policy/
+│   └── opa_set_policy/
 │       ├── __init__.py
 │       ├── engine.py             ← uses regopy.Interpreter
 │       └── cli.py
